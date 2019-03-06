@@ -13,9 +13,9 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-        <SignUp/>
+        {/* <SignUp/> */}
         {/* <CheckEmail/> */}
-          {/* {token && <SideBar/>} 
+          {token && <SideBar/>} 
           <Route path="/login" component={Login}/>
           <Route exact path="/" render={() => (
              token ? (
@@ -23,7 +23,7 @@ class App extends Component {
             ) : (
               <Redirect to="/login"/>
             )
-          )}/> */}
+          )}/>
         </div>
       </Router>
     );
