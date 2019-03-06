@@ -58,95 +58,97 @@ class SignUp extends Component {
         zip: '',
         latitude: null,
         longitude: null,
-        selectedOption: null
+        selectedOption: null,
+        addressLine: null
     }
 
     //Address autocomplete
     componentDidMount() {
-       this.initAutocomplete();
-    }
+        let { addressLine } = this.state;
 
-    initAutocomplete = () => {
-        let addressLine = '';
         const autocomplete = new google.maps.places.Autocomplete( this.addressInput.current, {types: ['geocode']});
-          google.maps.event.addListener(autocomplete, 'place_changed', this.handleSelect = () => {
-               
+          google.maps.event.addListener(autocomplete, 'place_changed', () => {
+
             let place = autocomplete.getPlace();
             this.setState({ latitude: place.geometry.location.lat()} );
             this.setState({ longitude: place.geometry.location.lng()} );
 
+            let { address_components } = place;
+
             //Fill in address fields
-            for(let i = 0; i < place.address_components.length; i++){
-                if(place.address_components[i].types[0] === 'street_number'){
-                    addressLine += place.address_components[i].long_name + ' ';
+            for(let i = 0; i < address_components.length; i++) {
+                let adrs_comp = address_components[i].types[0] ;
+                let long_name = address_components[i].long_name;
+                let short_name = address_components[i].short_name;
+
+                if(adrs_comp === 'street_number'){
+                    addressLine = long_name + ' ';
                 }
-                if(place.address_components[i].types[0] === 'route'){
-                    addressLine += place.address_components[i].long_name;
-                    this.addressInput.current.value = addressLine;
-                    this.setState({address1: this.addressInput.current.value});
-                } 
-                if(place.address_components[i].types[0] === 'locality'){
-                    this.cityInput.current.value = place.address_components[i].long_name;
-                    this.setState({ city: this.cityInput.current.value });
+                if(adrs_comp === 'route') {
+                    addressLine += long_name;
+                    this.setState({address1: addressLine});
                 }
-                if(place.address_components[i].types[0] === 'administrative_area_level_1'){
-                    this.stateInput.current.value = place.address_components[i].short_name;
-                    this.setState({ state: this.stateInput.current.value });
-                    }
-                if(place.address_components[i].types[0] === 'postal_code'){
-                    this.zipInput.current.value = place.address_components[i].short_name;
-                    this.setState({ zip: this.zipInput.current.value});
+                if(adrs_comp === 'locality'){
+                    this.setState({ city: long_name });
+                }
+                if(adrs_comp === 'administrative_area_level_1'){
+                    this.setState({ state: short_name });
+                }
+                if(adrs_comp === 'postal_code'){
+                    this.setState({ zip: short_name});
                 }
             }
-        
-        //Get latitude and longtitude of location and change the state
+
+            this.setState({addressLine: addressLine})
         });
     }
 
     handleChange = (event, field) => {
-        if(field === "name"){
-            this.setState({merchantName: event.target.value});
-        } else if(field === 'phone'){
-            this.setState({phone: event.target.value});
-        } else if(field === 'email'){
-            this.setState({email: event.target.value});
-        } else if(field === 'desc'){
-            this.setState({description: event.target.value});
-        } else if(field === 'www'){
-            this.setState({website: event.target.value});
-        } else if(field === 'address2'){
-            this.setState({address2: event.target.value});
-        }
+        let value = event.target.value;
+        this.setState({[field]: value});
     }
 
-    //Handle merchant options  
+    //Handle merchant options
     handleOption = (selectedOption) => {
         this.setState({ selectedOption});
     }
-    
-    // componentDidUpdate() {
-    //   console.log(this.state.selectedOption);
-    // }
 
     //Handle form submit
     handleSubmit = async () => {
-        const {merchantName, phone, email, description, website, address1, address2, city, state, zip, latitude, longitude, selectedOption} = this.state;
-        const data = { merchant: {
-            name: merchantName, 
-            email: email,
-            // password: "GJIUTF789$%jk",
-            description: description,
-            phone_number: phone,
-            website: website,
-            types: selectedOption,
-            line1: address1,
-            line2: address2,
-            city: city,
-            state: state,
-            zip: zip,
-            latitude: latitude,
-            longtitude: longitude
-        } }
+        const {
+            merchantName,
+            phone,
+            email,
+            description,
+            website,
+            address1,
+            address2,
+            city,
+            state,
+            zip,
+            latitude,
+            longitude,
+            selectedOption
+        } = this.state;
+
+        const data = {
+            merchant: {
+                name: merchantName,
+                email: email,
+                // password: "GJIUTF789$%jk",
+                description: description,
+                phone_number: phone,
+                website: website,
+                types: selectedOption,
+                line1: address1,
+                line2: address2,
+                city: city,
+                state: state,
+                zip: zip,
+                latitude: latitude,
+                longtitude: longitude
+            }
+        }
 
         let response = await fetch('https://api.rifird.com/merchants/signup/signup_as_merchant', {
               method: "POST",
@@ -166,19 +168,32 @@ class SignUp extends Component {
       }
 
     render(){
+        const {
+            merchantName,
+            phone,
+            email,
+            description,
+            website,
+            address1,
+            address2,
+            city,
+            state,
+            zip,
+        } = this.state;
+
         return (
             <SignForm>
             <div className="form">
-                <Input onChange={(event) => this.handleChange(event, 'name')} label="Merchant name" placeholder="Name"/>
-                <Input onChange={(event) => this.handleChange(event, 'phone')} label="Phone number" placeholder="Enter a phone number"/>
-                <Input onChange={(event) => this.handleChange(event, 'email')} label="Email address" placeholder="Address"/>
-                <Input onChange={(event) => this.handleChange(event, 'desc')} label="Description" placeholder="Description"/>
-                <Input onChange={(event) => this.handleChange(event, 'web')} label="Website" placeholder="www."/>
-                <Input onChange={(event) => this.handleChange(event, 'address1')}  inputRef={this.addressInput}  label="Address 1"/>
-                <Input onChange={(event) => this.handleChange(event, 'address2')}  label="Address 2" placeholder="Address2"/>
-                <Input onChange={(event) => this.handleChange(event, 'city')} inputRef={this.cityInput} label="City" placeholder="City"/>
-                <Input onChange={(event) => this.handleChange(event, 'state')}  inputRef={this.stateInput} label="State" placeholder="State"/>
-                <Input onChange={(event) => this.handleChange(event, 'zip')}  inputRef={this.zipInput} label="Zip" placeholder="Zip"></Input>
+                <Input onChange={(event) => this.handleChange(event, 'merchantName')} label="Merchant name" placeholder="Name" value={merchantName}/>
+                <Input onChange={(event) => this.handleChange(event, 'phone')} label="Phone number" placeholder="Enter a phone number" value={phone}/>
+                <Input onChange={(event) => this.handleChange(event, 'email')} label="Email address" placeholder="Address" value={email}/>
+                <Input onChange={(event) => this.handleChange(event, 'description')} label="Description" placeholder="Description" value={description}/>
+                <Input onChange={(event) => this.handleChange(event, 'web')} label="Website" placeholder="www." value={website}/>
+                <Input onChange={(event) => this.handleChange(event, 'address1')}  inputRef={this.addressInput}  label="Address 1" value={address1}/>
+                <Input onChange={(event) => this.handleChange(event, 'address2')}  label="Address 2" placeholder="Address2" value={address2}/>
+                <Input onChange={(event) => this.handleChange(event, 'city')}  label="City" placeholder="City" value={city}/>
+                <Input onChange={(event) => this.handleChange(event, 'state')}   label="State" placeholder="State" value={state}/>
+                <Input onChange={(event) => this.handleChange(event, 'zip')}   label="Zip" placeholder="Zip" value={zip}/>
                 <label>Merchant types</label>
                 <Select
                     value={this.selectedOption}

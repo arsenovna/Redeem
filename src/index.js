@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 
 
 //Reducers is a master state that produces the state of the entire application
-function reducer(state, action){
+function reducer(state, action) {
     console.log(action);
     return 'State';
 }
