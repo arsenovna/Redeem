@@ -12,7 +12,7 @@ function reducer(state, action){
     return 'State';
 }
 const store = createStore(reducer);
-console.log(store.getState());
+
 
 const action = {
     type: 'changeState',
