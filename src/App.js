@@ -3,7 +3,7 @@ import Login from "./publicPages/Login";
 import SideBar from './components/SideBar';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import './App.css';
-import SignUp from './publicPages/SignUp';
+// import SignUp from './publicPages/SignUp';
 // import CheckEmail from './publicPages/CheckEmail';
 
 
@@ -13,9 +13,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-        <SignUp/>
-        {/* <CheckEmail/> */}
-          {/* {token && <SideBar/>} 
+          {token && <SideBar/>} 
           <Route path="/login" component={Login}/>
           <Route exact path="/" render={() => (
              token ? (
@@ -23,7 +21,7 @@ class App extends Component {
             ) : (
               <Redirect to="/login"/>
             )
-          )}/> */}
+          )}/>
         </div>
       </Router>
     );
