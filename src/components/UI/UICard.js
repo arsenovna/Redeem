@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 
 let Card = styled.div`
-    border-radius: 4px;
-    background-color: white; 
-    border: 1px solid #ddd;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    width: ${(props) => props.mid ? '935px' : props.half ? '45%' : '975px'};
-    display: inline-block;
-    margin: ${(props) => props.half ? '30px 30px' : '30px 10px 30px 10px'}
+border-radius: 4px;
+background-color: white; 
+border: 1px solid #ddd;
+box-shadow: 0 1px 1px rgba(0,0,0,.05);
+width: ${(props) => props.mid ? '950px' : props.half ? '45%' : '970px'};
+display: inline-block;
+margin: ${(props) => props.mid ? '20px 5px 30px 5px' : props.half ? '30px 30px' : '30px 10px 30px 30px'}
 
     .card-title {
         color: #333;
