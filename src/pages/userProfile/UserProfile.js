@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import styled from 'styled-components';
-import { BrowserRouter as Link } from "react-router-dom";
+import { BrowserRouter as Route, Link } from "react-router-dom";
 
 
 
