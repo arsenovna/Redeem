@@ -5,7 +5,9 @@ import Dashboard from '../pages/dashboard/Dashboard';
 import Customers from '../pages/customers/Customers';
 import Perks from '../pages/perks/Perks';
 import UserProfile from '../pages/userProfile/UserProfile';
+import EditProfile from '../pages/userProfile/EditProfile';
 import Merchant from '../pages/merchant/Merchant';
+import EditMerchant from '../pages/merchant/EditMerchant';
 import AddPerkCustomer from '../pages/perks/AddPerkCustomer';
 import ViewPerk from '../pages/perks/ViewPerk';
 import EditPerk from '../pages/perks/EditPerk';
@@ -132,11 +134,13 @@ class SideBar extends  Component {
                     <Route path="/dashboard" component={Dashboard}/>
                     <Route path="/customers" component={Customers}/>
                     <Route path="/perks" component={Perks}/>
-                    <Route path="/userProfile" component={UserProfile}/>
-                    <Route path="/merchant" component={Merchant}/>
                     <Route path="/perk/addPerkCustomer" component={AddPerkCustomer}/>
                     <Route path="/perk/viewPerk" component={ViewPerk}/>
-                    {/* <Route path="/perk/editPerk" component={EditPerk}/> */}
+                    <Route path="/perk/editPerk" component={EditPerk}/>
+                    <Route path="/userProfile" component={UserProfile}/>
+                    <Route path="/editProfile" component={EditProfile}/>
+                    <Route path="/merchant" component={Merchant}/>
+                    <Route path="/editMerchant" component={EditMerchant}/>
             </Content>
             </>
             </Router>

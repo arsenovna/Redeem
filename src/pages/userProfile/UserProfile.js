@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import Button from '../../components/UI/Button';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 
 let Profile = styled.div`
@@ -18,8 +20,25 @@ let Profile = styled.div`
 
     button {
         margin-bottom: 15px;
+        *:focus {outline:none}
+    }
+    button:focus {
+        outline:0;
     }
 
+    a {
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 8px 10px;
+        background-color: #fd6c21;
+        color: #fff;
+        border-radius: 4px;
+    }
+
+    .edit-button {
+        margin-bottom: 30px;
+    }
 
 `;
 
@@ -38,7 +57,10 @@ class UserProfile extends Component {
         return(
             <Profile>
                 <UICard title="Profile details">
-                    <Button themed={true} text="Edit Profile"></Button>
+                    <div className="edit-button">
+                        <Link to="/editProfile">Edit Profile</Link>
+                    </div>
+                    {/* <Button onClick={() => this.handleClick()}themed={true} text="Edit Profile"></Button> */}
                     <div className="user-info"><span>Email:</span>{user.email}</div>
                     <div className="user-info"><span>First Name:</span>{user.firstName}</div>
                     <div className="user-info"><span>Last Name:</span>{user.lastName}</div>
