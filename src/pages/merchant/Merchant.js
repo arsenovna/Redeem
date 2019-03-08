@@ -64,28 +64,27 @@ class Merchant extends Component {
             }
         })
         .then(response => response.json())
-        .then(data => console.log(data))
-        // .then(data => this.setState({
-        //         merchant: {
-        //             name: data.name,
-        //             phoneNumber: data.display_phone,
-        //             contactEmail: data.contact_email,
-        //             description: data.description,
-        //             website: data.website,
-        //             logo: data.logo_url,
-        //             background: data.background_url,
-        //             merchantTypes: data.merchant_types,
-        //             address1: data.address.line1,
-        //             address2: data.address.line2,
-        //             city: data.address.city,
-        //             state: data.address.state,
-        //             zip: data.address.zip,
-        //             latitude: data.latitude,
-        //             longitude: data.longtitude,
-        //             openHours: data.opening_hours
-        //         } })
-        // )
-   
+        // .then(data => console.log(data.merchant))
+        .then(data => this.setState({
+                merchant: {
+                    name: data.merchant.name,
+                    phoneNumber: data.merchant.display_phone,
+                    contactEmail: data.merchant.contact_email,
+                    description: data.merchant.description,
+                    website: data.merchant.website,
+                    logo: data.merchant.logo_url,
+                    background: data.merchant.background_url,
+                    merchantTypes: data.merchant.merchant_types,
+                    address1: data.merchant.address.line1,
+                    address2: data.merchant.address.line2,
+                    city: data.merchant.address.city,
+                    state: data.merchant.address.state,
+                    zip: data.merchant.address.zip,
+                    latitude: data.merchant.latitude,
+                    longitude: data.merchant.longitude,
+                    openHours: data.merchant.opening_hours
+                } })
+        )
     }
 
     render(){
@@ -119,7 +118,7 @@ class Merchant extends Component {
 
                 </UICard>
                 <UICard title="Open Hours">
-                    <div className="user-info">{ merchant.openHours.length != null && merchant.openHours.length > 0 ? <><span>Open hours:</span>{merchant.openHours}</> : "You didn't set open hours."}</div>
+                    <div className="user-info">{ merchant.openHours != null && merchant.openHours.length > 0 ? <>{merchant.openHours}</> : "You didn't set open hours."}</div>
                 </UICard>
             </Profile>
         );
