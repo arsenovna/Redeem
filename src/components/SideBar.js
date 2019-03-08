@@ -14,18 +14,18 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 let Header = styled.div`
     background: white;
     height: 70px;
-
-    .nav-bar {
-        overflow: hidden;
-        position: fixed;
-        top: 0;
-    }
+    position: sticky;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 9999;
 
     div {
         width: 170px;
         height: 70px;
         background-color: #fd6c21;
     }
+
     img {
         height: 40px;
         display:block;
@@ -109,7 +109,7 @@ class SideBar extends  Component {
             <Router>
             <>
             <Header>
-                <div className="nav-bar">
+                <div className="navbar">
                     <div>
                         <img  alt="" src="/img/rifirdLogo.png"/>
                     </div>
