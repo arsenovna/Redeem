@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import {sortTable} from '../../helpers/Helper';
-import { BrowserRouter as Route,  Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 
 let Container = styled.div`

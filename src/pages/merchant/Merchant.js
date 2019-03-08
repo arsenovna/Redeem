@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import styled from 'styled-components';
-import { BrowserRouter as Route,  Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 
 
 let Profile = styled.div`
@@ -66,24 +66,24 @@ class Merchant extends Component {
         .then(response => response.json())
         // .then(data => console.log(data.merchant))
         .then(data => this.setState({
-                merchant: {
-                    name: data.merchant.name,
-                    phoneNumber: data.merchant.display_phone,
-                    contactEmail: data.merchant.contact_email,
-                    description: data.merchant.description,
-                    website: data.merchant.website,
-                    logo: data.merchant.logo_url,
-                    background: data.merchant.background_url,
-                    merchantTypes: data.merchant.merchant_types,
-                    address1: data.merchant.address.line1,
-                    address2: data.merchant.address.line2,
-                    city: data.merchant.address.city,
-                    state: data.merchant.address.state,
-                    zip: data.merchant.address.zip,
-                    latitude: data.merchant.latitude,
-                    longitude: data.merchant.longitude,
-                    openHours: data.merchant.opening_hours
-                } })
+            merchant: {
+                name: data.merchant.name,
+                phoneNumber: data.merchant.display_phone,
+                contactEmail: data.merchant.contact_email,
+                description: data.merchant.description,
+                website: data.merchant.website,
+                logo: data.merchant.logo_url,
+                background: data.merchant.background_url,
+                merchantTypes: data.merchant.merchant_types,
+                address1: data.merchant.address.line1,
+                address2: data.merchant.address.line2,
+                city: data.merchant.address.city,
+                state: data.merchant.address.state,
+                zip: data.merchant.address.zip,
+                latitude: data.merchant.latitude,
+                longitude: data.merchant.longitude,
+                openHours: data.merchant.opening_hours
+            }})
         )
     }
 

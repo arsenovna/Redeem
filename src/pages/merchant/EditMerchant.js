@@ -99,7 +99,7 @@ class EditMerchant extends Component {
                         <SelectMerchant/>
                         <label>Opening Hours</label>
                         {openingHours && openingHours.map((hour, index) => 
-                        <OpeningHours hour={hour}/>)}
+                        <OpeningHours key={index} hour={hour}/>)}
                         <div className="buttons">
                             <Button themed={true} text="Save"/>
                             <Button style={defaultBtn} text="Cancel"/>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
-import { BrowserRouter as Route,  Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import styled from 'styled-components';
 
 let Container = styled.div`
