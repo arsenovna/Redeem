@@ -77,13 +77,13 @@ class EditMerchant extends Component {
                         <Input label="Website"/>
                   
                         <label>Logo</label>
-                        <img src="./img/logo.jpg"/>
+                        <img alt="" src="./img/logo.jpg"/>
                         <div className="buttons">
                             <Button style={defaultBtn} text="Choose Image"></Button>
                             <Button style={blueBtn} text="Upload"></Button>
                         </div>
                         <label>Background</label>
-                        <img src="./img/background.jpg"/>
+                        <img alt="" src="./img/background.jpg"/>
                         <div className="buttons">
                             <Button style={defaultBtn} text="Choose Image"></Button>
                             <Button style={blueBtn} text="Upload"></Button>

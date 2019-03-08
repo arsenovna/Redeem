@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
-import Button from '../../components/UI/Button';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 

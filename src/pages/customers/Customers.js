@@ -16,7 +16,6 @@ class Customers extends Component {
         rows: []
     }
 
-
   componentDidMount() {
         let token = window.localStorage.getItem('authentication_token');
         fetch('https://api.rifird.com/admin/customers/?limit=30&offset=0', {

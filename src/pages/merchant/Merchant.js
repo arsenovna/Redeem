@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
-import Button from '../../components/UI/Button';
 import styled from 'styled-components';
+import { BrowserRouter as Route,  Link } from "react-router-dom";
 
 
 let Profile = styled.div`
@@ -16,33 +16,76 @@ let Profile = styled.div`
         }
     }
 
-    button {
-        margin-bottom: 15px;
+    a {
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 8px 10px;
+        background-color: #fd6c21;
+        color: #fff;
+        border-radius: 4px;
+    }
+
+    .edit-button {
+        margin-bottom: 30px;
     }
 `;
 
 class Merchant extends Component {
     state = {
         merchant: {
-            name: 'Express Hair Studios',
-            phoneNumber: '(708)-974-0033',
-            contantEmail: 'mgmt@expresshairstudios.com',
-            description: 'Trends come and go, which is why we focus on delivering affordable style that stays true to who you are—no matter the season. You’ll get just the look you’re going for while relaxing in a comfortable, friendly environment when you come to Express Hair.',
-            website: 'www.expresshairstudios.com',
-            logo: './img/logo.jpg',
-            background: './img/background.jpg',
+            name: '',
+            phoneNumber: '',
+            contantEmail: '',
+            description: '',
+            website: '',
+            logo: '',
+            background:'', 
             publicProfile: 'No',
             merchantTypes: '',
-            address1: '7624 W. 111th Street',
+            address1: '',
             address2: '',
-            city: 'Palos Hills',
-            state: 'IL',
-            zip: '60465',
-            latitude: 41.689885,
-            longitude: -87.8087099,
+            city: '',
+            state: '',
+            zip: '',
+            latitude: null,
+            longitude: null,
             openHours: []
-
         }
+    }
+
+    componentDidMount() {
+        let token = window.localStorage.getItem('authentication_token');
+        fetch('https://api.rifird.com/admin/merchants/1', {
+            method: 'GET',   
+            headers: {
+                'Authorization': `Token token=${token}`,
+                'Content-type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        // .then(data => this.setState({
+        //         merchant: {
+        //             name: data.name,
+        //             phoneNumber: data.display_phone,
+        //             contactEmail: data.contact_email,
+        //             description: data.description,
+        //             website: data.website,
+        //             logo: data.logo_url,
+        //             background: data.background_url,
+        //             merchantTypes: data.merchant_types,
+        //             address1: data.address.line1,
+        //             address2: data.address.line2,
+        //             city: data.address.city,
+        //             state: data.address.state,
+        //             zip: data.address.zip,
+        //             latitude: data.latitude,
+        //             longitude: data.longtitude,
+        //             openHours: data.opening_hours
+        //         } })
+        // )
+   
     }
 
     render(){
@@ -50,7 +93,9 @@ class Merchant extends Component {
         return(
             <Profile>
                 <UICard title="Merchant details">
-                    <Button themed={true} text="Edit Merchant"></Button>
+                    <div className="edit-button">
+                        <Link to="/editMerchant">Edit merchant</Link>
+                    </div>
                     <div className="user-info"><span>Name:</span>{merchant.name}</div>
                     <div className="user-info"><span>Phone Number:</span>{merchant.phoneNumber}</div>
                     <div className="user-info"><span>Contact Email:</span>{merchant.contactNumber}</div>
@@ -74,12 +119,11 @@ class Merchant extends Component {
 
                 </UICard>
                 <UICard title="Open Hours">
-                    <div className="user-info">{merchant.openHours.length > 0 ? <><span>Longitude:</span>{merchant.openHours}</> : "You didn't set open hours."}</div>
+                    <div className="user-info">{ merchant.openHours.length != null && merchant.openHours.length > 0 ? <><span>Open hours:</span>{merchant.openHours}</> : "You didn't set open hours."}</div>
                 </UICard>
             </Profile>
         );
     }
-
 }
 
 export default Merchant;

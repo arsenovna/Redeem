@@ -90,17 +90,25 @@ let Perk = styled.div`
                 margin-left: 27px;
                 margin-bottom: 15px;
             }
+
+            input:focus {
+                outline: none;
+            }
     
             label {
                 margin-bottom: 10px;
                 margin-left: 27px;
             }
 
-            .buttons {
+            .btns {
                 display: flex;
                 margin-top: 15px;
                 margin-left: 30px;
                 width: 26%;
+            }
+
+            button:focus {
+                outline: none;
             }
 
             .select {
@@ -178,7 +186,7 @@ class AddPerkCustomer extends Component {
       let json = await response.json();
       this.props.history.push('/perk/viewPerk');
       console.log(json);
-}
+    }
 
     render(){
         let cancelBtn = {color: '#333', backgroundColor: '#fff', border: '1px solid #ccc', padding: '8px 13px'};
@@ -213,7 +221,7 @@ class AddPerkCustomer extends Component {
                         <Input name="finePrint" onChange={(event) => this.handleChange(event)} label="Fine print"/>
                         <Input name="referral" onChange={(event) => this.handleChange(event)}label="Required Referrals"/>
                         <Input name="expire_date" onChange={(event) => this.handleChange(event)} label="Expire date" type="date" min="2019-03-05" max="2020-03-05" step="7"/>
-                        <div className="buttons">
+                        <div className="btns">
                             <Button onClick={() => this.handleSubmit()}  style={saveBtn} text="Save"/>
                             <Button style={cancelBtn} text="Cancel"/>
                         </div>

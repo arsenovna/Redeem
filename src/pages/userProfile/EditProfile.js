@@ -20,14 +20,26 @@ let EditForm = styled.div`
             line-height: 1.42857143;
         }
 
+        input:focus {
+            outline: none;
+        }
+
         label {
             margin-bottom: 10px;
+        }
+
+        .btns {
+            display: flex;
+            width: 26%;
+            *:focus {outline:none}
         }
     }
 `;
 
 class EditProfile extends Component {
     render(){
+        let cancelBtn = {color: '#333', backgroundColor: '#fff', border: '1px solid #ccc', padding: '8px 13px', marginLeft: '10px', fontWeight: 'bold'};
+        let saveBtn = {color: 'white', backgroundColor: '#fd6c21', padding: '9px 13px', fontWeight: 'bold'}
         return(
             <EditForm>
                 <UICard title="Edit profile details">
@@ -37,8 +49,10 @@ class EditProfile extends Component {
                         <Input label="Last Name"/>
                         <Input label="Password"/>
                         <Input label="Confirm Password"/>
-                        <Button themed={true} text="Submit"/>
-                        <Button themed={false} text="Cancel"/>
+                        <div className="btns">
+                            <Button style={saveBtn} text="Save"/>
+                            <Button style={cancelBtn} text="Cancel"/>
+                        </div>
                     </form>
                 </UICard>
             </EditForm>

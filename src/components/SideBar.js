@@ -10,7 +10,7 @@ import Merchant from '../pages/merchant/Merchant';
 import EditMerchant from '../pages/merchant/EditMerchant';
 import AddPerkCustomer from '../pages/perks/AddPerkCustomer';
 import ViewPerk from '../pages/perks/ViewPerk';
-import EditPerk from '../pages/perks/EditPerk';
+// import EditPerk from '../pages/perks/EditPerk';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 let Header = styled.div`
@@ -136,7 +136,7 @@ class SideBar extends  Component {
                     <Route path="/perks" component={Perks}/>
                     <Route path="/perk/addPerkCustomer" component={AddPerkCustomer}/>
                     <Route path="/perk/viewPerk" component={ViewPerk}/>
-                    <Route path="/perk/editPerk" component={EditPerk}/>
+                    {/* <Route path="/perk/editPerk" component={EditPerk}/> */}
                     <Route path="/userProfile" component={UserProfile}/>
                     <Route path="/editProfile" component={EditProfile}/>
                     <Route path="/merchant" component={Merchant}/>

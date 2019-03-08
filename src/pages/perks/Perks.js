@@ -34,6 +34,10 @@ let Container = styled.div`
         border-radius: 4px;
     }
 
+    .btn:hover {
+        text-decoration: none;
+    }
+
     .react-tabs__tab-list {
         margin: 0;
     }
