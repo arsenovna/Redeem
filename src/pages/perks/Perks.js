@@ -71,7 +71,7 @@ class Perks extends Component {
         rows: []
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let token = window.localStorage.getItem('authentication_token');
         fetch('https://api.rifird.com/admin/perks/?limit=30&offset=0', {
             method: 'GET',   
@@ -81,7 +81,6 @@ class Perks extends Component {
             }
         })
         .then(response => response.json())
-        // .then(data => console.log(data))
         .then(data => this.setState({
             rows: data.perks.map(item => ({
                 perk: item.title,

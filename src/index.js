@@ -3,25 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
+import {Provider} from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import store from './redux/store/index';
 
+render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root')
+);
 
-//Reducers is a master state that produces the state of the entire application
-// function reducer(state, action) {
-//     console.log(action);
-//     return 'State';
-// }
-// const store = createStore(reducer);
-
-
-// const action = {
-//     type: 'changeState',
-//     payload: {
-//         newState: 'New state'
-//     }
-// }
-
-// store.dispatch(action);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

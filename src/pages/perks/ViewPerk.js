@@ -28,11 +28,20 @@ let Container = styled.div`
    .back-botton {
        margin-top: 20px;
    }
-
-
 `;
 class ViewPerk extends Component {
+    state = {
+        perk: null
+    }
+
+    componentDidMount(){
+        this.setState({
+            perk: this.props.state.perk
+        });
+    }
+
     render(){
+       
         return(
             <Container>
                 <UICard title="View perk">
