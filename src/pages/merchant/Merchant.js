@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import styled from 'styled-components';
 import { BrowserRouter as Route, Link } from "react-router-dom";
+import MerchantService from '../../services/merchants';
+import { getMerchantRequest } from '../../redux/actions/index'
+import { connect } from "react-redux";
+
+const merchantService = new MerchantService();
 
 
 let Profile = styled.div`
@@ -32,63 +37,15 @@ let Profile = styled.div`
 `;
 
 class Merchant extends Component {
-    state = {
-        merchant: {
-            name: '',
-            phoneNumber: '',
-            contantEmail: '',
-            description: '',
-            website: '',
-            logo: '',
-            background:'', 
-            publicProfile: 'No',
-            merchantTypes: '',
-            address1: '',
-            address2: '',
-            city: '',
-            state: '',
-            zip: '',
-            latitude: null,
-            longitude: null,
-            openHours: []
-        }
-    }
 
-    componentDidMount() {
-        let token = window.localStorage.getItem('authentication_token');
-        fetch('https://api.rifird.com/admin/merchants/1', {
-            method: 'GET',   
-            headers: {
-                'Authorization': `Token token=${token}`,
-                'Content-type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        // .then(data => console.log(data.merchant))
-        .then(data => this.setState({
-            merchant: {
-                name: data.merchant.name,
-                phoneNumber: data.merchant.display_phone,
-                contactEmail: data.merchant.contact_email,
-                description: data.merchant.description,
-                website: data.merchant.website,
-                logo: data.merchant.logo_url,
-                background: data.merchant.background_url,
-                merchantTypes: data.merchant.merchant_types,
-                address1: data.merchant.address.line1,
-                address2: data.merchant.address.line2,
-                city: data.merchant.address.city,
-                state: data.merchant.address.state,
-                zip: data.merchant.address.zip,
-                latitude: data.merchant.latitude,
-                longitude: data.merchant.longitude,
-                openHours: data.merchant.opening_hours
-            }})
-        )
+    async componentDidMount(){
+        let data = await merchantService.getMerchant();
+        this.props.dispatch(getMerchantRequest(data));
     }
 
     render(){
-        let {merchant} = this.state;
+        const {merchant} = this.props;
+        console.log(merchant)
         return(
             <Profile>
                 <UICard title="Merchant details">
@@ -96,21 +53,21 @@ class Merchant extends Component {
                         <Link to="/editMerchant">Edit merchant</Link>
                     </div>
                     <div className="user-info"><span>Name:</span>{merchant.name}</div>
-                    <div className="user-info"><span>Phone Number:</span>{merchant.phoneNumber}</div>
-                    <div className="user-info"><span>Contact Email:</span>{merchant.contactNumber}</div>
+                    <div className="user-info"><span>Phone Number:</span>{merchant.display_phone}</div>
+                    <div className="user-info"><span>Contact Email:</span>{merchant.contact_email}</div>
                     <div className="user-info"><span>Description:</span>{merchant.description}</div>
                     <div className="user-info"><span>Website:</span>{merchant.website}</div>
-                    <div className="user-info"><span>Logo:</span><img  alt="" src={merchant.logo}/></div>
-                    <div className="user-info"><span>Background:</span><img alt="" src={merchant.background}/></div>
+                    <div className="user-info"><span>Logo:</span><img  alt="" src={merchant.logo_url}/></div>
+                    <div className="user-info"><span>Background:</span><img alt="" src={merchant.background_url}/></div>
                     <div className="user-info"><span>Public Profile:</span>{merchant.publicProfile}</div>
                     <div className="user-info"><span>Merchant Types:</span>{merchant.merchantTypes}</div>
                 </UICard>
                 <UICard title="Adress">
-                    <div className="user-info"><span>Address1:</span>{merchant.address1}</div>
-                    <div className="user-info"><span>Address2:</span>{merchant.address2}</div>
-                    <div className="user-info"><span>City:</span>{merchant.city}</div>
-                    <div className="user-info"><span>State:</span>{merchant.state}</div>
-                    <div className="user-info"><span>Zip:</span>{merchant.zip}</div>
+                    <div className="user-info"><span>Address1:</span>{merchant.address.line1}</div>
+                    <div className="user-info"><span>Address2:</span>{merchant.address.line2}</div>
+                    <div className="user-info"><span>City:</span>{merchant.address.city}</div>
+                    <div className="user-info"><span>State:</span>{merchant.address.state}</div>
+                    <div className="user-info"><span>Zip:</span>{merchant.address.zip}</div>
                 </UICard>
                 <UICard title="Location">
                     <div className="user-info"><span>Latitude:</span>{merchant.latitude}</div>
@@ -118,11 +75,15 @@ class Merchant extends Component {
 
                 </UICard>
                 <UICard title="Open Hours">
-                    <div className="user-info">{ merchant.openHours != null && merchant.openHours.length > 0 ? <>{merchant.openHours}</> : "You didn't set open hours."}</div>
+                    <div className="user-info">{ merchant.opening_hours != null && merchant.opening_hours.length > 0 ? <>{merchant.openHours}</> : "You didn't set open hours."}</div>
                 </UICard>
             </Profile>
         );
     }
 }
 
-export default Merchant;
+const mapStateToProps = state => ({
+    merchant: state.merchant
+})
+
+export default connect(mapStateToProps)(Merchant);

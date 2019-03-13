@@ -1,1 +1,2 @@
-export const EDIT_PERK = 'EDIT_PERK';
+export const FETCH_PERKS  = 'FETCH_PERKS';
+export const FETCH_MERCHANT = 'FETCH_MERCHANT';

@@ -163,8 +163,6 @@ class SignUp extends Component {
           })
         let json = await response.json();
         console.log(json);
-        // window.localStorage.setItem('authentication_token', json.merchant.authentication_token);
-        // window.location.href = "http://localhost:3000/dashboard";
       }
 
     render(){

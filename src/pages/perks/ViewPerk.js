@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import { BrowserRouter as Route, Link } from "react-router-dom";
 import styled from 'styled-components';
+import { connect } from "react-redux";
 
 let Container = styled.div`
     margin-left: 20px;
-
     label {
         font-weight: bold;
     }
@@ -30,18 +30,9 @@ let Container = styled.div`
    }
 `;
 class ViewPerk extends Component {
-    state = {
-        perk: null
-    }
-
-    componentDidMount(){
-        this.setState({
-            perk: this.props.state.perk
-        });
-    }
-
     render(){
-       
+        const {perks} = this.props;
+        console.log(perks);
         return(
             <Container>
                 <UICard title="View perk">
@@ -84,9 +75,9 @@ class ViewPerk extends Component {
             </Container>
         );
     }
-
-
 }
 
-
-export default ViewPerk;
+const mapStateToProps = state => ({
+    perks: state.perks
+})
+export default connect(mapStateToProps)(ViewPerk);

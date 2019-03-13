@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import Table from '../../components/Table';
-import styled from 'styled-components';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import {sortTable} from '../../helpers/Helper';
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import styled from 'styled-components';
+import 'react-tabs/style/react-tabs.css';
+import PerksService from '../../services/perks';
+import { getPerksRequest } from '../../redux/actions/index'
+
+const perksService = new PerksService();
 
 
 let Container = styled.div`
@@ -71,23 +76,9 @@ class Perks extends Component {
         rows: []
     }
 
-    componentWillMount() {
-        let token = window.localStorage.getItem('authentication_token');
-        fetch('https://api.rifird.com/admin/perks/?limit=30&offset=0', {
-            method: 'GET',   
-            headers: {
-                'Authorization': `Token token=${token}`,
-                'Content-type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => this.setState({
-            rows: data.perks.map(item => ({
-                perk: item.title,
-                count: item.required_referrals,
-                buttons: <div><Link to="/perk/viewPerk">View</Link><Link to="/perk/editPerk">Edit</Link></div>
-            }))
-        }))
+    async componentDidMount(){
+        let data = await perksService.getPerks();
+        this.props.dispatch(getPerksRequest(data));
     }
 
     onSort = (sortKey) => {
@@ -97,7 +88,14 @@ class Perks extends Component {
     }
 
     render(){
-        let {headers, rows} = this.state;
+        const {perks} = this.props;
+        console.log(perks)
+        let rows = perks ? perks.map(item => ({
+            perk: item.title,
+            count: item.required_referrals,
+            buttons: <div><Link to="/perk/viewPerk">View</Link><Link to="/perk/editPerk">Edit</Link></div>
+        })) : {};
+        let {headers} = this.state;
         return(
             <Container>
             <Tabs>
@@ -130,4 +128,8 @@ class Perks extends Component {
     }
 }
 
-export default Perks;
+const mapStateToProps = state => ({
+    perks: state.perks
+})
+
+export default connect(mapStateToProps)(Perks);

@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import Table from '../../components/Table';
 import {sortTable} from '../../helpers/Helper';
+import CustomersService from '../../services/customers';
 
+const customersService = new CustomersService();
 
 class Customers extends Component {
     state = {
@@ -16,24 +18,16 @@ class Customers extends Component {
         rows: []
     }
 
-  componentDidMount() {
-        let token = window.localStorage.getItem('authentication_token');
-        fetch('https://api.rifird.com/admin/customers/?limit=30&offset=0', {
-            method: 'GET',   
-            headers: {
-                'Authorization': `Token token=${token}`,
-                'Content-type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => this.setState({
-            rows: data.customers.map(item => ({
+  async componentDidMount() {
+    let data = await customersService.getCustomers();
+    this.setState({
+        rows: data.customers.map(item => ({
                 phone_number: item.phone_number,
                 email: item.email,
                 name: item.name,
                 referral: item.num_referred
-            }))
         }))
+    });
     }
 
     onSort = (sortKey) => {

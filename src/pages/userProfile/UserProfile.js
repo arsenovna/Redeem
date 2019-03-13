@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import styled from 'styled-components';
 import { BrowserRouter as Route, Link } from "react-router-dom";
-
-
+import { connect } from "react-redux";
 
 let Profile = styled.div`
     .user-info {
@@ -42,17 +41,8 @@ let Profile = styled.div`
 `;
 
 class UserProfile extends Component {
-    state = {
-        user: {
-            email: 'jim@rifird.com',
-            firstName: 'Jim',
-            lastName: 'Trahanas',
-            password: '*****'
-        }
-    }
-
     render(){
-        let {user} = this.state;
+        const {merchant} = this.props;
         return(
             <Profile>
                 <UICard title="Profile details">
@@ -60,10 +50,10 @@ class UserProfile extends Component {
                         <Link to="/editProfile">Edit Profile</Link>
                     </div>
                     {/* <Button onClick={() => this.handleClick()}themed={true} text="Edit Profile"></Button> */}
-                    <div className="user-info"><span>Email:</span>{user.email}</div>
-                    <div className="user-info"><span>First Name:</span>{user.firstName}</div>
-                    <div className="user-info"><span>Last Name:</span>{user.lastName}</div>
-                    <div className="user-info"><span>Password:</span>{user.password}</div>
+                    <div className="user-info"><span>Email:</span>{merchant.email}</div>
+                    <div className="user-info"><span>First Name:</span>{merchant.owner_first_name}</div>
+                    <div className="user-info"><span>Last Name:</span>{merchant.owner_last_name}</div>
+                    <div className="user-info"><span>Password:</span>*****</div>
                 </UICard>
             </Profile>
         );
@@ -71,4 +61,8 @@ class UserProfile extends Component {
 
 }
 
-export default UserProfile;
+const mapStateToProps = state => ({
+    merchant: state.merchant
+})
+
+export default connect(mapStateToProps)(UserProfile);

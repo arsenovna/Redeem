@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 
-
+// create classname Card
 let Card = styled.div`
 border-radius: 4px;
 background-color: white; 

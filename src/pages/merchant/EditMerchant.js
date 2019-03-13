@@ -6,6 +6,7 @@ import CheckBox from '../../components/UI/CheckBox';
 import styled from 'styled-components';
 import TimePicker from 'rc-time-picker';
 import moment from 'moment';
+import { connect } from "react-redux";
 
 let ChangeMerchant = styled.div`
     margin-left: 20px;
@@ -184,4 +185,8 @@ class OpeningHours extends Component {
     }
 }
 
-export default EditMerchant;
+const mapStateToProps = state => ({
+    merchant: state.merchant
+})
+
+export default connect(mapStateToProps)(EditMerchant);

@@ -3,6 +3,7 @@ import UICard from '../../components/UI/UICard';
 import Button from '../../components/UI/Button';
 import styled from 'styled-components';
 import Input from '../../components/UI/Input';
+import { connect } from "react-redux";
 
 let EditForm = styled.div`
     form {
@@ -38,15 +39,16 @@ let EditForm = styled.div`
 
 class EditProfile extends Component {
     render(){
+        const { merchant } = this.props;
         let cancelBtn = {color: '#333', backgroundColor: '#fff', border: '1px solid #ccc', padding: '8px 13px', marginLeft: '10px', fontWeight: 'bold'};
         let saveBtn = {color: 'white', backgroundColor: '#fd6c21', padding: '9px 13px', fontWeight: 'bold'}
         return(
             <EditForm>
                 <UICard title="Edit profile details">
                     <form>
-                        <Input label="Email"/>
-                        <Input label="First Name"/>
-                        <Input label="Last Name"/>
+                        <Input label="Email" value={merchant.email}/>
+                        <Input label="First Name" value={merchant.owner_first_name}/>
+                        <Input label="Last Name" value={merchant.owner_last_name}/>
                         <Input label="Password"/>
                         <Input label="Confirm Password"/>
                         <div className="btns">
@@ -60,7 +62,10 @@ class EditProfile extends Component {
     }
 }
 
-export default EditProfile;
+const mapStateToProps = state => ({
+    merchant: state.merchant
+})
+export default connect(mapStateToProps)(EditProfile);
 
 
 
