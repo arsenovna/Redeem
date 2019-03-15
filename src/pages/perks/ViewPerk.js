@@ -1,78 +1,54 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import { BrowserRouter as Route, Link } from "react-router-dom";
-import styled from 'styled-components';
 import { connect } from "react-redux";
 
-let Container = styled.div`
-    margin-left: 20px;
-    label {
-        font-weight: bold;
-    }
-
-    .group {
-        margin-bottom: 10px;
-    }
-
-    a {
-        text-decoration: none;
-        color: #333;
-        background-color: #fff;
-        border: 1px solid #ccc
-        font-size: 14px;
-        padding: 7px 14px;
-        border-radius: 4px;
-        font-weight: 500;
-   }
-
-   .back-botton {
-       margin-top: 20px;
-   }
-`;
 class ViewPerk extends Component {
     render(){
         const {perks} = this.props;
-        console.log(perks);
+        const currentPerk = perks.find(item => item.id == this.props.match.params.id);
         return(
-            <Container>
+            <div className="view-perk-container">
                 <UICard title="View perk">
-                    <div className="group">
+                <div className="perk-grid">
+                    <div>
                         <label>Title</label>
-                        <div></div>
+                        <div>{currentPerk.title}</div>
                     </div>
-                    <div className="group">
+                    <div>
                         <label>Description</label>
-                        <div></div>
+                        <div>{currentPerk.description}</div>
                     </div>
-                    <div className="group">
+                    <div>
                         <label>Referral Bonus</label>
-                        <div></div>
+                        <div>{currentPerk.referral_bonus ? 'yes' : 'no'}</div>
                     </div>
-                    <div className="group">
+                    <div>
                         <label>Enabled</label>
-                        <div></div>
+                        <div>{currentPerk.enabled ? 'yes' : 'no'}</div>
                     </div>
-                    <div className="group">
+                    <div>
                         <label>Requires QR code</label>
-                        <div></div>
+                        <div>{currentPerk.requires_qr_code ? 'yes' : 'no'}</div>
                     </div>
-                    <div className="group">
+                    <div>
                         <label>Fine print</label>
-                        <div></div>
+                        <div>{currentPerk.fine_print}</div>
                     </div>
-                    <div className="group">
+                    <div>
                         <label>Required Referrals</label>
-                        <div></div>
+                        <div>{currentPerk.required_referrals}</div>
                     </div>
-                    <div className="group">
+                    <div>
                         <label>Expire date</label>
-                        <div></div>
+                        <div>{currentPerk.expire_date}</div>
                     </div>
-                    <div className="back-botton">
+                    <div>
                         <Link to="/perks">Back to perks list</Link>
                     </div>
+                    </div>
                 </UICard>
-            </Container>
+            </div>
         );
     }
 }

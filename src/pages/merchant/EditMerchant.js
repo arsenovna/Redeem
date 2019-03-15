@@ -62,6 +62,8 @@ class EditMerchant extends Component {
         ]
     }
     render(){
+        const {merchant} = this.props;
+        console.log(merchant);
         let defaultBtn = {color: '#333', backgroundColor: '#fff', border: '1px solid #ccc'};
         let blueBtn = {color: 'white', backgroundColor: '#7aa8d3', marginLeft: '10px'}
         
@@ -70,32 +72,32 @@ class EditMerchant extends Component {
             <ChangeMerchant>
                 <UICard title="Edit merchant details">
                     <form>
-                        <Input label="Name"/>
-                        <Input label="Email"/>
-                        <Input label="Contact Email"/>
-                        <Input label="Phone Number"/>
-                        <Input label="Description"/>
-                        <Input label="Website"/>
+                        <Input label="Name" value={merchant.name}/>
+                        <Input label="Email" value={merchant.email}/>
+                        <Input label="Contact Email" value={merchant.contact_email}/>
+                        <Input label="Phone Number" value={merchant.contact_email}/>
+                        <Input label="Description" value={merchant.display_phone}/>
+                        <Input label="Website" value={merchant.website}/>
                   
                         <label>Logo</label>
-                        <img alt="" src="./img/logo.jpg"/>
+                        <img alt="" src={merchant.logo_url}/>
                         <div className="buttons">
                             <Button style={defaultBtn} text="Choose Image"></Button>
                             <Button style={blueBtn} text="Upload"></Button>
                         </div>
                         <label>Background</label>
-                        <img alt="" src="./img/background.jpg"/>
+                        <img alt="" src={merchant.background_url}/>
                         <div className="buttons">
                             <Button style={defaultBtn} text="Choose Image"></Button>
                             <Button style={blueBtn} text="Upload"></Button>
                         </div>
-                        <Input label="Address 1"/>
-                        <Input label="Address 2"/>
-                        <Input label="City"/>
-                        <Input label="State"/>
-                        <Input label="Zip"/>
-                        <Input label="Latitude"/>
-                        <Input label="Longitude"/>
+                        <Input label="Address 1" value={merchant.address.line1}/>
+                        <Input label="Address 2" value={merchant.address.line2}/>
+                        <Input label="City" value={merchant.address.city}/>
+                        <Input label="State" value={merchant.address.state}/>
+                        <Input label="Zip" value={merchant.address.zip}/>
+                        <Input label="Latitude" value={merchant.latitude}/>
+                        <Input label="Longitude" value={merchant.longitude}/>
                         <CheckBox style={{margin: '15px 0'}} label="Public Profile"/>
                         <SelectMerchant/>
                         <label>Opening Hours</label>

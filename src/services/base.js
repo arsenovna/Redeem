@@ -21,4 +21,22 @@ export default class Base {
             return error;
         }
     }
+
+    // postJson = async (url) => {
+    //     try {
+    //         let request = await fetch(url, 
+    //             {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Authorization': `Token token=${this.getCurrentSession()}`,
+    //                     'Content-type': 'application/json'
+    //                 }
+    //             });
+    //         let response = await request.json();
+    //         return response;
+    //     } 
+    //     catch (error) {
+    //         return error;
+    //     }
+    // }
 }

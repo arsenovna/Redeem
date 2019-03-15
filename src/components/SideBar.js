@@ -135,7 +135,7 @@ class SideBar extends  Component {
                     <Route path="/customers" component={Customers}/>
                     <Route path="/perks" component={Perks}/>
                     <Route path="/perk/addPerkCustomer" component={AddPerkCustomer}/>
-                    <Route path="/perk/viewPerk" component={ViewPerk}/>
+                    <Route path="/perk/viewPerk/:id" component={ViewPerk}/>
                     <Route path="/perk/editPerk" component={EditPerk}/>
                     <Route path="/userProfile" component={UserProfile}/>
                     <Route path="/editProfile" component={EditProfile}/>

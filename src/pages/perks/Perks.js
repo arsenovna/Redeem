@@ -5,65 +5,11 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {sortTable} from '../../helpers/Helper';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import styled from 'styled-components';
 import 'react-tabs/style/react-tabs.css';
 import PerksService from '../../services/perks';
 import { getPerksRequest } from '../../redux/actions/index'
 
 const perksService = new PerksService();
-
-
-let Container = styled.div`
-    margin-top: 27px;
-    margin-left: 27px;
-    width: 95%;
- 
-    a {
-        margin-left: 10px;
-        text-decoration: none;
-        color: #2f78b9;
-        font-weight: 500;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    .btn {
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-        padding: 8px 10px;
-        background-color: #fd6c21;
-        color: #fff;
-        border-radius: 4px;
-    }
-
-    .btn:hover {
-        text-decoration: none;
-    }
-
-    .react-tabs__tab-list {
-        margin: 0;
-    }
-    
-    .switch-button {
-        margin: 15px 0px 0px 15px;
-    }
-
-    .react-tabs__tab-panel {
-        background: #fff;
-        border-left: 1px solid #aaa;
-        border-right: 1px solid #aaa;
-        border-bottom: 1px solid #aaa;
-        padding: 10px;
-    }
-
-    .react-tabs__tab-panel--selected {
-        display: block;
-    }
-
-`;
 
 class Perks extends Component {
     state = {
@@ -89,15 +35,14 @@ class Perks extends Component {
 
     render(){
         const {perks} = this.props;
-        console.log(perks)
         let rows = perks ? perks.map(item => ({
             perk: item.title,
             count: item.required_referrals,
-            buttons: <div><Link to="/perk/viewPerk">View</Link><Link to="/perk/editPerk">Edit</Link></div>
+            buttons: <div><Link to={`/perk/viewPerk/${item.id}`}>View</Link><Link to={`/perk/editPerk/${item.id}`}>Edit</Link></div>
         })) : {};
         let {headers} = this.state;
         return(
-            <Container>
+            <div className="perk-container">
             <Tabs>
                 <TabList>
                     <Tab>Customer Rewards</Tab> 
@@ -123,7 +68,7 @@ class Perks extends Component {
                     </UICard>
                 </TabPanel>
             </Tabs>
-            </Container>
+            </div>
         );
     }
 }

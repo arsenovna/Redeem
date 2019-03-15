@@ -6,119 +6,119 @@ import CheckBox from '../../components/UI/CheckBox';
 import Select from 'react-select';
 
 
-let Perk = styled.div`
-    display: flex;
-    .left {
-        background: rgb(19, 23, 30);
-        text-align: center;
-        padding: 40px 0;
-        position: relative;
-        margin-top: 30px;
-        height: 600px;
-        width: 50%;
-    }
+// let Perk = styled.div`
+//     display: flex;
+//     .left {
+//         background: rgb(19, 23, 30);
+//         text-align: center;
+//         padding: 40px 0;
+//         position: relative;
+//         margin-top: 30px;
+//         height: 600px;
+//         width: 50%;
+//     }
 
-    .express-studios {
-        position: absolute;
-        text-align: center;
-        transform: translate(-50%, -50%);
-        top: 180px;
-        left: 50%;
-        * {
-            margin: 0;
-            color: white;
-        }
-    }
+//     .express-studios {
+//         position: absolute;
+//         text-align: center;
+//         transform: translate(-50%, -50%);
+//         top: 180px;
+//         left: 50%;
+//         * {
+//             margin: 0;
+//             color: white;
+//         }
+//     }
 
-    .expires {
-        position: absolute;
-        text-align: center;
-        transform: translate(-50%, -50%);
-        bottom: 160px;
-        left: 50%;
-        color: white;
-        span {
-            color: rgb(157, 157, 157);
-        }
-    }
+//     .expires {
+//         position: absolute;
+//         text-align: center;
+//         transform: translate(-50%, -50%);
+//         bottom: 160px;
+//         left: 50%;
+//         color: white;
+//         span {
+//             color: rgb(157, 157, 157);
+//         }
+//     }
 
-    .right {
-        width: 50%;
-        margin-top: 40px;
+//     .right {
+//         width: 50%;
+//         margin-top: 40px;
         
-        .checkBox {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
+//         .checkBox {
+//             display: flex;
+//             align-items: center;
+//             margin-top: 10px;
 
-            label {
-                margin-bottom: 0;
-                margin-right: 10px;
-            }
+//             label {
+//                 margin-bottom: 0;
+//                 margin-right: 10px;
+//             }
 
-            input {
-                margin: 0;
-                width: initial;
-            }
-        }
+//             input {
+//                 margin: 0;
+//                 width: initial;
+//             }
+//         }
 
-        p {
-            color: rgb(157, 157, 157);
-            margin-top: 5px;
-            text-align: center;
-        }
+//         p {
+//             color: rgb(157, 157, 157);
+//             margin-top: 5px;
+//             text-align: center;
+//         }
 
-        h2 {
-            font-size: 25px;
-            font-weight: normal;
-            margin-bottom: 0px;
-            text-align: center;
-        }
+//         h2 {
+//             font-size: 25px;
+//             font-weight: normal;
+//             margin-bottom: 0px;
+//             text-align: center;
+//         }
 
-        form {
-            display: flex;
-            flex-direction: column;
+//         form {
+//             display: flex;
+//             flex-direction: column;
     
-            input {
-                width: 84%;
-                height: 27px;
-                padding: 7px 12px;
-                font-size: 14px;
-                line-height: 1.42857143;
-                border-radius: 3px;
-                border: 1px solid #d9d9d9;
-                margin-left: 27px;
-                margin-bottom: 15px;
-            }
+//             input {
+//                 width: 84%;
+//                 height: 27px;
+//                 padding: 7px 12px;
+//                 font-size: 14px;
+//                 line-height: 1.42857143;
+//                 border-radius: 3px;
+//                 border: 1px solid #d9d9d9;
+//                 margin-left: 27px;
+//                 margin-bottom: 15px;
+//             }
 
-            input:focus {
-                outline: none;
-            }
+//             input:focus {
+//                 outline: none;
+//             }
     
-            label {
-                margin-bottom: 10px;
-                margin-left: 27px;
-            }
+//             label {
+//                 margin-bottom: 10px;
+//                 margin-left: 27px;
+//             }
 
-            .btns {
-                display: flex;
-                margin-top: 15px;
-                margin-left: 30px;
-                width: 26%;
-            }
+//             .btns {
+//                 display: flex;
+//                 margin-top: 15px;
+//                 margin-left: 30px;
+//                 width: 26%;
+//             }
 
-            button:focus {
-                outline: none;
-            }
+//             button:focus {
+//                 outline: none;
+//             }
 
-            .select {
-                font: inherit;
-                width: 89%;
-                margin-left: 27px;
-            }
-        }
-    }
-`;
+//             .select {
+//                 font: inherit;
+//                 width: 89%;
+//                 margin-left: 27px;
+//             }
+//         }
+//     }
+// `;
 
 const options = [
     {value: '$12 W', label: '$12 W'},
@@ -182,7 +182,7 @@ class EditPerk extends Component {
         let cancelBtn = {color: '#333', backgroundColor: '#fff', border: '1px solid #ccc', padding: '8px 13px'};
         let saveBtn = {color: 'white', backgroundColor: '#fd6c21', padding: '9px 13px'}
         return(
-            <Perk>
+            <div className="perk-edit-container">
                 <div className="left">
                     <img alt="" src="/img/screen.png"/>
                     <div className="express-studios">
@@ -197,7 +197,7 @@ class EditPerk extends Component {
                 <div className="right">
                     <h2 className="">Edit Perk for Customer Rewards</h2>
                     <p className="">Use the guide to the left as a reference when creating your perk promos.</p>
-                    <form>
+                    <div className="form">
                         <Input name="title" onChange={(event) => this.handleChange(event)} label="Title"></Input>
                         <Input name="description" onChange={(event) => this.handleChange(event)} label="Description"/>
                         <Select className="select"
@@ -215,9 +215,9 @@ class EditPerk extends Component {
                             <Button onClick={() => this.handleSubmit()}  style={saveBtn} text="Save"/>
                             <Button style={cancelBtn} text="Cancel"/>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </Perk>
+            </div>
         );
     }
 }

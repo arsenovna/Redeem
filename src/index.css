@@ -11,4 +11,268 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+} 
+
+/* LOGIN STYLE */
+.login-header {
+  text-align: center;
+  background: #fd6c21;
+  height: 100px;
+  font-family: Lato,sans-serif;
+  color: white;
 }
+.login-header img {
+  height: 40px;
+  margin-top: 25px;
+}
+
+.login-header p {
+  margin: 0;
+}
+
+.login-container {
+    margin: 20px auto;
+    width: 360px;
+    padding: 20px;
+    border: 1px solid #c2c2c2;
+    font-family: Lato,sans-serif;
+    background-color: white;
+}
+
+.login-container label {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.login-container input {
+  display: inline-block;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; 
+  height: 42px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  padding: 2px 12px;
+  margin-bottom: 30px;
+}
+
+.login-container input:focus {
+  outline: none;
+}
+
+.login-container   div:not(.form) {
+  display: flex;
+  align-items: center;
+}
+
+.login-container span {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+/* VIEW PERK */
+.view-perk-container label {
+  font-weight: bold;
+}
+
+.perk-grid {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-gap: 20px;
+
+}
+
+.view-perk-container a {
+  text-decoration: none;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  padding: 7px 14px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* PERK */
+.perk-container {
+  margin-top: 27px;
+  margin-left: 27px;
+  width: 95%;
+}
+
+.perk-container a {
+  margin-left: 10px;
+  text-decoration: none;
+  color: #2f78b9;
+  font-weight: 500;
+}
+
+.perk-container a:hover {
+  text-decoration: underline;
+}
+
+.perk-container .btn {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 10px;
+  background-color: #fd6c21;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.perk-container .btn:hover {
+  text-decoration: none;
+}
+
+.perk-container .react-tabs__tab-list {
+  margin: 0;
+}
+
+.perk-container .switch-button {
+  margin: 15px 0px 0px 15px;
+}
+
+.perk-container .react-tabs__tab-panel {
+  background: #fff;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  padding: 10px;
+}
+
+.perk-container .react-tabs__tab-panel--selected {
+  display: block;
+}
+
+
+/* EDIT PERK */
+.perk-edit-container {
+  display: flex;
+}
+
+.perk-edit-container .left {
+  background: rgb(19, 23, 30);
+  text-align: center;
+  padding: 40px 0;
+  position: relative;
+  margin-top: 30px;
+  height: 600px;
+  width: 50%;
+}
+
+.perk-edit-container .express-studios {
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  top: 180px;
+  left: 50%;
+
+}
+
+.perk-edit-container  {
+  margin: 0;
+  color: white;
+}
+
+.perk-edit-container .expires {
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  bottom: 160px;
+  left: 50%;
+  color: white;  
+  }
+
+.expires span {
+    color: rgb(157, 157, 157);
+}
+
+.right {
+  width: 50%;
+  margin-top: 40px;
+}
+
+.checkBox {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.checkBox label {
+  margin-bottom: 0;
+  margin-right: 10px;
+  color: black;
+}
+
+.checkBox input {
+  margin: 0;
+  /* width: initial; */
+}
+
+.right p {
+  /* color: rgb(157, 157, 157); */
+  margin-top: 5px;
+  text-align: center;
+  color: black;
+}
+
+.right h2 {
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    text-align: center;
+    color: black;
+}
+
+.right .form {
+  display: flex;
+  flex-direction: column;
+}
+
+.right .form input {
+  width: 84%;
+  height: 27px;
+  padding: 7px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 3px;
+  border: 1px solid #d9d9d9;
+  margin-left: 27px;
+  margin-bottom: 15px;
+}
+
+.right .form input:focus {
+  outline: none;
+}
+
+.right .form label {
+  margin-bottom: 10px;
+  margin-left: 27px;
+  color: black;
+}
+
+.right .form .btns {
+  display: flex;
+  margin-top: 15px;
+  margin-left: 30px;
+  width: 26%;
+}
+
+.right .form button:focus {
+  outline: none;
+}
+
+.right .form .select {
+  font: inherit;
+  width: 89%;
+  margin-left: 27px;
+}
+
+
+
+

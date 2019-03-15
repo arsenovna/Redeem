@@ -3,65 +3,6 @@ import styled from 'styled-components';
 import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
 
-
-let Header = styled.div`
-    text-align: center;
-    background: #fd6c21;
-    height: 100px;
-    font-family: Lato,sans-serif;
-    color: white;
-
-    img {
-     height: 40px;
-     margin-top: 25px;
-    }
-
-    p {
-     margin: 0;
-    }
-`;
-
-
-let Container = styled.div`
-    .form {
-        margin: 20px auto;
-        width: 360px;
-        padding: 20px;
-        border: 1px solid #c2c2c2;
-        font-family: Lato,sans-serif;
-        background-color: white;
-    }
-
-    label {
-        display: inline-block;
-        width: 100%;
-        text-align: left;
-        margin-bottom: 10px;
-    }
-
-    input {
-        display: inline-block;
-        width: 100%;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box; 
-        height: 42px;
-        font-size: 13px;
-        line-height: 1.42857143;
-        padding: 2px 12px;
-        margin-bottom: 30px;
-    }
-
-    div:not(.form) {
-        display: flex;
-        align-items: center;
-        span {
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-    }
-`;
-
 class Login extends Component {
     state = {
         //intial state of email and password is empty
@@ -96,11 +37,11 @@ class Login extends Component {
     render(){
         return (
             <div>
-                <Header>
+                <div className="login-header">
                     <img alt="" src="./img/rifirdLogo.png"/>
                     <p>Spread The Love</p>
-                </Header>
-                <Container>
+                </div>
+                <div className="login-container">
                     <div className="form">
                         <Input onChange={(event) => this.handleChange(event, 'email')} label="Email" required={true} placeholder="Email"/>
                         <Input onChange={(event) => this.handleChange(event, 'password')} label="Password" required={true} placeholder="Password"/>
@@ -110,7 +51,7 @@ class Login extends Component {
                             <Button onClick={() => this.checkToken()}text="Sign Up"/>
                         </div>
                     </div>
-                </Container>
+                </div>
             </div>
         );
     }
