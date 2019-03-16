@@ -5,6 +5,7 @@ import CheckBox from '../../components/UI/CheckBox';
 import Select from 'react-select';
 import { connect } from "react-redux";
 import PerksService from '../../services/perks';
+import { getPerksRequest } from '../../redux/actions/index'
 
 
 const perksService = new PerksService();
@@ -20,8 +21,6 @@ class EditPerk extends Component {
     }
 
     handleChange = (event, field) => {
-        // console.log('event', event);
-        // console.log('field', field);
         this.setState({ perk: { ...this.state.perk, [field]: event }});
     }
 
@@ -29,8 +28,10 @@ class EditPerk extends Component {
         const data = { 
             perk: { ...this.state.perk, bonus_perks: [{...this.state.perk}], merchant: this.props.merchant}
         }
-        perksService.editPerk(data);
-        // this.props.history.push('/perk/viewPerk');
+        await perksService.editPerk(data);
+        let perk = await perksService.getPerks();
+        this.props.dispatch(getPerksRequest(perk));
+        this.props.history.push(`/perk/viewPerk/${data.perk.id}`);
     }
 
     componentWillMount(){

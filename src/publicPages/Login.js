@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
+import { Link } from 'react-router-dom'
 
 class Login extends Component {
     state = {
@@ -44,7 +45,7 @@ class Login extends Component {
                         <div>
                             <Button onClick={() => this.handleSubmit()} text="Login"/>
                             <span>or</span>
-                            <Button onClick={() => this.checkToken()}text="Sign Up"/>
+                            <Link to="/signUp"/>Sign Up<Link/>
                         </div>
                     </div>
                 </div>

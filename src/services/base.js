@@ -24,21 +24,17 @@ export default class Base {
 
     postJson = async (url, data) => { 
         try {
-            let response = await fetch(`${url}${data.perk.bonus_perks[0].id}`, {
+            await fetch(`${url}${data.perk.id}`, {
                 method: "PUT",
                 headers: {
                   'Authorization': `Token token=${this.getCurrentSession()}`,
                   'Accept': 'application/json, text/javascript',
                   'Content-type': 'application/json'
                 },
-                mode: "no-cors",
                 cache: "no-cache",
                 credentials: "same-origin",
                 body: JSON.stringify(data)
             })
-            // return await response.json();
-            let res = await response.json();
-            console.log(res);
         }      
         catch (error) {
             return error;
