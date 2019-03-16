@@ -5,7 +5,7 @@ const baseService = new Base();
 
 export default class CustomersService {
 
-    constructor(){}
+    // constructor(){}
 
     getCustomers = () => baseService.getJson(customersAPI);
 }

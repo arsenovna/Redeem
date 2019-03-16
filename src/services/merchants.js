@@ -5,7 +5,7 @@ const baseService = new Base();
 
 export default class MerchantService {
 
-    constructor(){}
+    // constructor(){}
 
     getMerchant = () => baseService.getJson(merchantAPI);
 }

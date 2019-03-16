@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import styled from 'styled-components';
-import { BrowserRouter as Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 let Profile = styled.div`
@@ -49,7 +49,6 @@ class UserProfile extends Component {
                     <div className="edit-button">
                         <Link to="/editProfile">Edit Profile</Link>
                     </div>
-                    {/* <Button onClick={() => this.handleClick()}themed={true} text="Edit Profile"></Button> */}
                     <div className="user-info"><span>Email:</span>{merchant.email}</div>
                     <div className="user-info"><span>First Name:</span>{merchant.owner_first_name}</div>
                     <div className="user-info"><span>Last Name:</span>{merchant.owner_last_name}</div>
@@ -58,7 +57,6 @@ class UserProfile extends Component {
             </Profile>
         );
     }
-
 }
 
 const mapStateToProps = state => ({

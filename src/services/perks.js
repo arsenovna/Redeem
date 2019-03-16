@@ -1,11 +1,14 @@
 import Base from './base';
-import { perksAPI } from './API/index';
+import { perksAPI, editPerkAPI } from './API/index';
+
 
 const baseService = new Base();
 
 export default class PerksService {
 
-    constructor(){}
+    // constructor(){}
 
     getPerks = () => baseService.getJson(perksAPI);
+
+    editPerk = (data) => baseService.postJson(editPerkAPI, data);
 }

@@ -1,20 +1,15 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
 import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
 
 class Login extends Component {
     state = {
-        //intial state of email and password is empty
         email: '',
         password: ''
     }
     
-
-    //handleChange sets a new state, in other words sets a new value to input fields
     handleChange = (event, field) => {
-        field === "email" ? this.setState({email: event.target.value}) : 
-        this.setState({password: event.target.value});
+        this.setState({[field]: event});
     }
 
     handleSubmit = async () => {
@@ -35,6 +30,7 @@ class Login extends Component {
       }
 
     render(){
+        const {email, password} = this.state;
         return (
             <div>
                 <div className="login-header">
@@ -43,8 +39,8 @@ class Login extends Component {
                 </div>
                 <div className="login-container">
                     <div className="form">
-                        <Input onChange={(event) => this.handleChange(event, 'email')} label="Email" required={true} placeholder="Email"/>
-                        <Input onChange={(event) => this.handleChange(event, 'password')} label="Password" required={true} placeholder="Password"/>
+                        <Input onChange={(event) => this.handleChange(event, 'email')} label="Email" required={true} placeholder="Email" value={email}/>
+                        <Input onChange={(event) => this.handleChange(event, 'password')} label="Password" required={true} placeholder="Password" value={password}/>
                         <div>
                             <Button onClick={() => this.handleSubmit()} text="Login"/>
                             <span>or</span>

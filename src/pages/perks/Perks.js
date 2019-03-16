@@ -3,7 +3,7 @@ import UICard from '../../components/UI/UICard';
 import Table from '../../components/Table';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {sortTable} from '../../helpers/Helper';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import 'react-tabs/style/react-tabs.css';
 import PerksService from '../../services/perks';

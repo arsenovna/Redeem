@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import styled from 'styled-components';
-import { BrowserRouter as Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MerchantService from '../../services/merchants';
 import { getMerchantRequest } from '../../redux/actions/index'
 import { connect } from "react-redux";

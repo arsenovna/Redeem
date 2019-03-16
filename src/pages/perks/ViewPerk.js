@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
-import { BrowserRouter as Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 class ViewPerk extends Component {
     render(){
         const {perks} = this.props;
-        const currentPerk = perks.find(item => item.id == this.props.match.params.id);
+        const currentPerk = perks.find(item => item.id === parseInt(this.props.match.params.id));
         return(
             <div className="view-perk-container">
                 <UICard title="View perk">
@@ -52,7 +52,6 @@ class ViewPerk extends Component {
         );
     }
 }
-
 const mapStateToProps = state => ({
     perks: state.perks
 })
