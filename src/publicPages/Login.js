@@ -8,7 +8,7 @@ class Login extends Component {
         email: '',
         password: ''
     }
-    
+
     handleChange = (event, field) => {
         this.setState({[field]: event});
     }
@@ -45,7 +45,7 @@ class Login extends Component {
                         <div>
                             <Button onClick={() => this.handleSubmit()} text="Login"/>
                             <span>or</span>
-                            <Link to="/signUp"/>Sign Up<Link/>
+                            <Link to="/signup">Sign Up</Link>
                         </div>
                     </div>
                 </div>

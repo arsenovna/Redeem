@@ -1,5 +1,5 @@
 /* global google */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
 import styled from 'styled-components';
@@ -32,9 +32,9 @@ let SignForm = styled.div`
 `;
 
 const options = [
-    {value: 'bakery', label: 'Bakery'},
-    {value: 'bar', label: 'Bar'},
-    {value: 'cafe', label: 'Cafe'}
+    { value: 'bakery', label: 'Bakery' },
+    { value: 'bar', label: 'Bar' },
+    { value: 'cafe', label: 'Cafe' }
 ]
 
 class SignUp extends Component {
@@ -66,51 +66,51 @@ class SignUp extends Component {
     componentDidMount() {
         let { addressLine } = this.state;
 
-        const autocomplete = new google.maps.places.Autocomplete( this.addressInput.current, {types: ['geocode']});
-          google.maps.event.addListener(autocomplete, 'place_changed', () => {
+        const autocomplete = new google.maps.places.Autocomplete(this.addressInput.current, { types: ['geocode'] });
+        google.maps.event.addListener(autocomplete, 'place_changed', () => {
 
             let place = autocomplete.getPlace();
-            this.setState({ latitude: place.geometry.location.lat()} );
-            this.setState({ longitude: place.geometry.location.lng()} );
+            this.setState({ latitude: place.geometry.location.lat() });
+            this.setState({ longitude: place.geometry.location.lng() });
 
             let { address_components } = place;
 
             //Fill in address fields
-            for(let i = 0; i < address_components.length; i++) {
-                let adrs_comp = address_components[i].types[0] ;
+            for (let i = 0; i < address_components.length; i++) {
+                let adrs_comp = address_components[i].types[0];
                 let long_name = address_components[i].long_name;
                 let short_name = address_components[i].short_name;
 
-                if(adrs_comp === 'street_number'){
+                if (adrs_comp === 'street_number') {
                     addressLine = long_name + ' ';
                 }
-                if(adrs_comp === 'route') {
+                if (adrs_comp === 'route') {
                     addressLine += long_name;
-                    this.setState({address1: addressLine});
+                    this.setState({ address1: addressLine });
                 }
-                if(adrs_comp === 'locality'){
+                if (adrs_comp === 'locality') {
                     this.setState({ city: long_name });
                 }
-                if(adrs_comp === 'administrative_area_level_1'){
+                if (adrs_comp === 'administrative_area_level_1') {
                     this.setState({ state: short_name });
                 }
-                if(adrs_comp === 'postal_code'){
-                    this.setState({ zip: short_name});
+                if (adrs_comp === 'postal_code') {
+                    this.setState({ zip: short_name });
                 }
             }
 
-            this.setState({addressLine: addressLine})
+            this.setState({ addressLine: addressLine })
         });
     }
 
     handleChange = (event, field) => {
         let value = event.target.value;
-        this.setState({[field]: value});
+        this.setState({ [field]: value });
     }
 
     //Handle merchant options
     handleOption = (selectedOption) => {
-        this.setState({ selectedOption});
+        this.setState({ selectedOption });
     }
 
     //Handle form submit
@@ -151,21 +151,22 @@ class SignUp extends Component {
         }
 
         let response = await fetch('https://api.rifird.com/merchants/signup/signup_as_merchant', {
-              method: "POST",
-              headers: {
+            method: "POST",
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-              },
-              mode: "cors",
-              cache: "no-cache",
-              credentials: "same-origin",
-              body: JSON.stringify(data)
-          })
+            },
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            body: JSON.stringify(data)
+        })
         let json = await response.json();
         console.log(json);
-      }
+    }
 
-    render(){
+    render() {
+        console.log('asasas')
         const {
             merchantName,
             phone,
@@ -181,27 +182,27 @@ class SignUp extends Component {
 
         return (
             <SignForm>
-            <div className="form">
-                <Input onChange={(event) => this.handleChange(event, 'merchantName')} label="Merchant name" placeholder="Name" value={merchantName}/>
-                <Input onChange={(event) => this.handleChange(event, 'phone')} label="Phone number" placeholder="Enter a phone number" value={phone}/>
-                <Input onChange={(event) => this.handleChange(event, 'email')} label="Email address" placeholder="Address" value={email}/>
-                <Input onChange={(event) => this.handleChange(event, 'description')} label="Description" placeholder="Description" value={description}/>
-                <Input onChange={(event) => this.handleChange(event, 'web')} label="Website" placeholder="www." value={website}/>
-                <Input onChange={(event) => this.handleChange(event, 'address1')}  inputRef={this.addressInput}  label="Address 1" value={address1}/>
-                <Input onChange={(event) => this.handleChange(event, 'address2')}  label="Address 2" placeholder="Address2" value={address2}/>
-                <Input onChange={(event) => this.handleChange(event, 'city')}  label="City" placeholder="City" value={city}/>
-                <Input onChange={(event) => this.handleChange(event, 'state')}   label="State" placeholder="State" value={state}/>
-                <Input onChange={(event) => this.handleChange(event, 'zip')}   label="Zip" placeholder="Zip" value={zip}/>
-                <label>Merchant types</label>
-                <Select
-                    value={this.selectedOption}
-                    onChange={this.handleOption}
-                    options={options}
-                    isMulti={true}
-                    placeholder="Select..."
-                />
-                <Button onClick={() => this.handleSubmit()} themed={true} text="Submit"/>
-            </div>
+                <div className="form">
+                    <Input onChange={(event) => this.handleChange(event, 'merchantName')} label="Merchant name" placeholder="Name" value={merchantName} />
+                    <Input onChange={(event) => this.handleChange(event, 'phone')} label="Phone number" placeholder="Enter a phone number" value={phone} />
+                    <Input onChange={(event) => this.handleChange(event, 'email')} label="Email address" placeholder="Address" value={email} />
+                    <Input onChange={(event) => this.handleChange(event, 'description')} label="Description" placeholder="Description" value={description} />
+                    <Input onChange={(event) => this.handleChange(event, 'web')} label="Website" placeholder="www." value={website} />
+                    <Input onChange={(event) => this.handleChange(event, 'address1')} inputRef={this.addressInput} label="Address 1" value={address1} />
+                    <Input onChange={(event) => this.handleChange(event, 'address2')} label="Address 2" placeholder="Address2" value={address2} />
+                    <Input onChange={(event) => this.handleChange(event, 'city')} label="City" placeholder="City" value={city} />
+                    <Input onChange={(event) => this.handleChange(event, 'state')} label="State" placeholder="State" value={state} />
+                    <Input onChange={(event) => this.handleChange(event, 'zip')} label="Zip" placeholder="Zip" value={zip} />
+                    <label>Merchant types</label>
+                    <Select
+                        value={this.selectedOption}
+                        onChange={this.handleOption}
+                        options={options}
+                        isMulti={true}
+                        placeholder="Select..."
+                    />
+                    <Button onClick={() => this.handleSubmit()} themed={true} text="Submit" />
+                </div>
             </SignForm>
         );
     }

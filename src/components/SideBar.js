@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
 import Dashboard from '../pages/dashboard/Dashboard';
@@ -38,7 +38,7 @@ let Header = styled.div`
 let SideNav = styled.div`
     display: inline-block;
     width: 170px;
-    background-color: white; 
+    background-color: white;
     height: 100%;
     position: fixed;
 
@@ -73,14 +73,14 @@ let SideNav = styled.div`
         div {
             margin-bottom: 100px;
         }
-    }  
-    
+    }
+
     i: hover {
         color: #fd6c21;
     }
 
     a {
-        text-decoration: none; 
+        text-decoration: none;
         color: black;
     }
 
@@ -96,53 +96,53 @@ let SideNav = styled.div`
 
 let Content = styled.div`
     padding-left: 170px;
-    
+
 `;
 
-class SideBar extends  Component {
+class SideBar extends Component {
 
     logOut = () => {
         window.localStorage.removeItem('authentication_token');
         window.location.href = "http://localhost:3000";
     }
 
-    render(){
+    render() {
         return (
             <Router>
-            <>
-            <Header>
-                <div className="navbar">
-                    <div>
-                        <img  alt="" src="/img/rifirdLogo.png"/>
-                    </div>
-                </div>
-            </Header>
-            <SideNav>
-                <ul>
-                    <li><p>MAIN</p></li>
-                    <li><i className="fa fa-bar-chart"></i><Link to="/dashboard">Dashboard</Link></li>
-                    <li><i className="fa fa-users"></i><Link to="/customers">Customers</Link></li>
-                    <li><i className="fa fa-list-alt"></i><Link to="/perks">Perks</Link></li>
-                    <div></div>
-                    <li><p>ACCOUNT</p></li>
-                    <li><i className="fa fa-user-circle-o"></i><Link to="/userProfile">User Profile</Link></li>
-                    <li><i className="fa fa-building"></i><Link to="/merchant">Merchant</Link></li>
-                    <li><i className="fa fa-sign-out"></i><Link to="/login" onClick={() => this.logOut()}>Logout</Link></li>
-                </ul>
-            </SideNav>
-            <Content>
-                    <Route path="/dashboard" component={Dashboard}/>
-                    <Route path="/customers" component={Customers}/>
-                    <Route path="/perks" component={Perks}/>
-                    <Route path="/perk/addPerkCustomer" component={AddPerkCustomer}/>
-                    <Route path="/perk/viewPerk/:id" component={ViewPerk}/>
-                    <Route path="/perk/editPerk/:id" component={EditPerk}/>
-                    <Route path="/userProfile" component={UserProfile}/>
-                    <Route path="/editProfile" component={EditProfile}/>
-                    <Route path="/merchant" component={Merchant}/>
-                    <Route path="/editMerchant" component={EditMerchant}/>
-            </Content>
-            </>
+                <>
+                    <Header>
+                        <div className="navbar">
+                            <div>
+                                <img alt="" src="/img/rifirdLogo.png" />
+                            </div>
+                        </div>
+                    </Header>
+                    <SideNav>
+                        <ul>
+                            <li><p>MAIN</p></li>
+                            <li><i className="fa fa-bar-chart"></i><Link to="/dashboard">Dashboard</Link></li>
+                            <li><i className="fa fa-users"></i><Link to="/customers">Customers</Link></li>
+                            <li><i className="fa fa-list-alt"></i><Link to="/perks">Perks</Link></li>
+                            <div></div>
+                            <li><p>ACCOUNT</p></li>
+                            <li><i className="fa fa-user-circle-o"></i><Link to="/userProfile">User Profile</Link></li>
+                            <li><i className="fa fa-building"></i><Link to="/merchant">Merchant</Link></li>
+                            <li><i className="fa fa-sign-out"></i><Link to="/login" onClick={() => this.logOut()}>Logout</Link></li>
+                        </ul>
+                    </SideNav>
+                    <Content>
+                        <Route path="/dashboard" component={Dashboard} />
+                        <Route path="/customers" component={Customers} />
+                        <Route path="/perks" component={Perks} />
+                        <Route path="/perk/addPerkCustomer" component={AddPerkCustomer} />
+                        <Route path="/perk/viewPerk/:id" component={ViewPerk} />
+                        <Route path="/perk/editPerk/:id" component={EditPerk} />
+                        <Route path="/userProfile" component={UserProfile} />
+                        <Route path="/editProfile" component={EditProfile} />
+                        <Route path="/merchant" component={Merchant} />
+                        <Route path="/editMerchant" component={EditMerchant} />
+                    </Content>
+                </>
             </Router>
         );
     }
