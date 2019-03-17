@@ -21,12 +21,21 @@ class EditPerk extends Component {
     }
 
     handleChange = (event, field) => {
-        this.setState({ perk: { ...this.state.perk, [field]: event }});
+        this.setState({
+            perk: {
+                ...this.state.perk,
+                [field]: event
+            }
+        });
     }
 
     handleSubmit = async () => {
         const data = { 
-            perk: { ...this.state.perk, bonus_perks: [{...this.state.perk}], merchant: this.props.merchant}
+            perk: {
+                ...this.state.perk,
+                bonus_perks: [{ ...this.state.perk }],
+                merchant: this.props.merchant
+            }
         }
         await perksService.editPerk(data);
         let perk = await perksService.getPerks();
@@ -44,7 +53,7 @@ class EditPerk extends Component {
         const {perk} = this.state
         
         return(
-            <div className="perk-edit-container">
+            <div className="perk-cont">
                 <div className="left">
                     <img alt="" src="/img/screen.png"/>
                     <div className="express-studios">
@@ -69,7 +78,7 @@ class EditPerk extends Component {
                         isMulti={false}
                         placeholder="Select a bonus"/>
                         <CheckBox onChange={(event) => this.handleChange(event, 'enabled')} label="Enabled" checked={perk.enabled}/> 
-                        <CheckBox onChange={(event) => this.handleChange(event, 'requires_qr_code')} style={{marginBottom: '15px'}} label="Requires QR code" checked={perk.requires_qr_code}/> />
+                        <CheckBox onChange={(event) => this.handleChange(event, 'requires_qr_code')} style={{marginBottom: '15px'}} label="Requires QR code" checked={perk.requires_qr_code}/>
                         <Input name="finePrint" onChange={(event) => this.handleChange(event, 'fine_print')} label="Fine print" value={perk.fine_print}/>
                         <Input name="referral" onChange={(event) => this.handleChange(event, 'required_referrals')} label="Required Referrals" value={perk.required_referrals}/>
                         <Input name="expire_date" onChange={(event) => this.handleChange(event, 'expire_date')} label="Expire date" type="date" min="2019-03-05" max="2020-03-05" step="7" value={perk.expire_date}/>

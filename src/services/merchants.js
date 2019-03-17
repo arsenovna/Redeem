@@ -8,4 +8,7 @@ export default class MerchantService {
     // constructor(){}
 
     getMerchant = () => baseService.getJson(merchantAPI);
+
+    editMerchant = (data) => baseService.postJson(merchantAPI + data.merchant.id, data);
+
 }

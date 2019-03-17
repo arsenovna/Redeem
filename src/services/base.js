@@ -24,7 +24,8 @@ export default class Base {
 
     postJson = async (url, data) => { 
         try {
-            await fetch(`${url}${data.perk.id}`, {
+            // `${url}${data.perk.id}`
+            let response = await fetch(url, {
                 method: "PUT",
                 headers: {
                   'Authorization': `Token token=${this.getCurrentSession()}`,
@@ -35,6 +36,8 @@ export default class Base {
                 credentials: "same-origin",
                 body: JSON.stringify(data)
             })
+            let res = response.json();
+            console.log(res)
         }      
         catch (error) {
             return error;

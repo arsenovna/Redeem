@@ -1,40 +1,11 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
-import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import MerchantService from '../../services/merchants';
 import { getMerchantRequest } from '../../redux/actions/index'
 import { connect } from "react-redux";
 
 const merchantService = new MerchantService();
-
-
-let Profile = styled.div`
-    .user-info {
-        display: flex;
-        border-top: 1px solid #ddd;
-        padding: 10px;
-
-        span {
-            font-weight: bold;
-            width: 16%;
-        }
-    }
-
-    a {
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 14px;
-        padding: 8px 10px;
-        background-color: #fd6c21;
-        color: #fff;
-        border-radius: 4px;
-    }
-
-    .edit-button {
-        margin-bottom: 30px;
-    }
-`;
 
 class Merchant extends Component {
 
@@ -45,9 +16,8 @@ class Merchant extends Component {
 
     render(){
         const {merchant} = this.props;
-        console.log(merchant)
         return(
-            <Profile>
+            <div className="merchant-container">
                 <UICard title="Merchant details">
                     <div className="edit-button">
                         <Link to="/editMerchant">Edit merchant</Link>
@@ -77,7 +47,7 @@ class Merchant extends Component {
                 <UICard title="Open Hours">
                     <div className="user-info">{ merchant.opening_hours != null && merchant.opening_hours.length > 0 ? <>{merchant.openHours}</> : "You didn't set open hours."}</div>
                 </UICard>
-            </Profile>
+            </div>
         );
     }
 }

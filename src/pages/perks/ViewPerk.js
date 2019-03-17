@@ -7,42 +7,27 @@ class ViewPerk extends Component {
     render(){
         const {perks} = this.props;
         const currentPerk = perks.find(item => item.id === parseInt(this.props.match.params.id));
+
+        let gridItem = (label, text) => {
+            return (
+                <div>
+                    <label>{label}</label>
+                    <div>{text}</div>
+                </div>
+            )
+        } 
         return(
             <div className="view-perk-container">
                 <UICard title="View perk">
                 <div className="perk-grid">
-                    <div>
-                        <label>Title</label>
-                        <div>{currentPerk.title}</div>
-                    </div>
-                    <div>
-                        <label>Description</label>
-                        <div>{currentPerk.description}</div>
-                    </div>
-                    <div>
-                        <label>Referral Bonus</label>
-                        <div>{currentPerk.referral_bonus ? 'yes' : 'no'}</div>
-                    </div>
-                    <div>
-                        <label>Enabled</label>
-                        <div>{currentPerk.enabled ? 'yes' : 'no'}</div>
-                    </div>
-                    <div>
-                        <label>Requires QR code</label>
-                        <div>{currentPerk.requires_qr_code ? 'yes' : 'no'}</div>
-                    </div>
-                    <div>
-                        <label>Fine print</label>
-                        <div>{currentPerk.fine_print}</div>
-                    </div>
-                    <div>
-                        <label>Required Referrals</label>
-                        <div>{currentPerk.required_referrals}</div>
-                    </div>
-                    <div>
-                        <label>Expire date</label>
-                        <div>{currentPerk.expire_date}</div>
-                    </div>
+                    {gridItem("Title", currentPerk.title)}
+                    {gridItem("Description", currentPerk.description)}
+                    {gridItem("Referral Bonus", currentPerk.referral_bonus ? 'yes' : 'no')}
+                    {gridItem("Enabled", currentPerk.enabled ? 'yes' : 'no')}
+                    {gridItem("Requires QR code", currentPerk.requires_qr_code ? 'yes' : 'no')}
+                    {gridItem("Fine print", currentPerk.fine_print)}
+                    {gridItem("Required Referrals", currentPerk.required_referrals)}
+                    {gridItem("Expire date<", currentPerk.expire_date)}
                     <div>
                         <Link to="/perks">Back to perks list</Link>
                     </div>

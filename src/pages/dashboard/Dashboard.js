@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
-import styled from 'styled-components';
-
-let Board = styled.div`
-    display: flex;
-`;
 
 class Dashboard extends Component {
     render(){
         return (
-            <Board>
+            <div className="dashboard">
                 <UICard title="Active perks" half={true}>
                    Name	Referrals Generated
                 </UICard>
@@ -18,7 +13,7 @@ class Dashboard extends Component {
                     Referrals Sent: 0<br/>
                     Incentives Redeemed: 0<br/>
                 </UICard>
-            </Board>
+            </div>
         );
     }
 }

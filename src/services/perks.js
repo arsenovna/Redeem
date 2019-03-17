@@ -10,5 +10,5 @@ export default class PerksService {
 
     getPerks = () => baseService.getJson(perksAPI);
 
-    editPerk = (data) => baseService.postJson(editPerkAPI, data);
+    editPerk = (data) => baseService.postJson(editPerkAPI + data.perk.id, data);
 }
