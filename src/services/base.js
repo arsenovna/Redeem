@@ -34,10 +34,10 @@ export default class Base {
                 },
                 cache: "no-cache",
                 credentials: "same-origin",
-                body: JSON.stringify(data)
+                body: JSON.stringify(data) // change it
             })
-            let res = response.json();
-            console.log(res)
+            let res = await response.json();
+            return res;
         }
         catch (error) {
             return error;
@@ -54,7 +54,6 @@ export default class Base {
                 body: data
             })
             let res = await response.json();
-
             return res;
         }
         catch (error) {
