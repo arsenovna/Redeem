@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
 import { Link } from 'react-router-dom'
+import { SignInService } from '../services/signIn';
+
+const login = new SignInService();
 
 class Login extends Component {
     state = {
@@ -15,19 +18,13 @@ class Login extends Component {
 
     handleSubmit = async () => {
         let formData = new FormData();
-        formData.append('merchant[email]', this.state.email);
-        formData.append('merchant[password]', this.state.password);
+        formData.append('merchant[email]', 'nurmuhamed@gmail.com');
+        formData.append('merchant[password]', 'rifird123');
+        let x = await login.signIn(formData);
+        console.log(formData)
 
-        let response = await fetch('https://api.rifird.com/admin/merchants/login', {
-              method: "POST",
-              mode: "cors",
-              cache: "no-cache",
-              credentials: "same-origin",
-              body: formData,
-          })
-        let json = await response.json();
-        window.localStorage.setItem('authentication_token', json.merchant.authentication_token);
-        window.location.href = "http://localhost:3000/dashboard";
+        // window.localStorage.setItem('authentication_token', json.merchant.authentication_token);
+        // window.location.href = "http://localhost:3000/dashboard";
       }
 
     render(){
@@ -43,7 +40,7 @@ class Login extends Component {
                         <Input onChange={(event) => this.handleChange(event, 'email')} label="Email" required={true} placeholder="Email" value={email}/>
                         <Input onChange={(event) => this.handleChange(event, 'password')} label="Password" required={true} placeholder="Password" value={password}/>
                         <div>
-                            <Button onClick={() => this.handleSubmit()} text="Login"/>
+                            <Button className="loginBtn"onClick={() => this.handleSubmit()} text="Login"/>
                             <span>or</span>
                             <Link to="/signup">Sign Up</Link>
                         </div>

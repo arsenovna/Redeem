@@ -1,35 +1,11 @@
 /* global google */
 import React, { Component } from 'react';
 import Input from '../components/UI/Input';
-import Button from '../components/UI/Button';
-import styled from 'styled-components';
 import Select from 'react-select';
+import Button from '../components/UI/Button';
+import { SignUpService } from '../services/signUp';
 
-let SignForm = styled.div`
-    .form {
-        display: flex;
-        flex-direction: column;
-        width: 66.66%;
-        margin: 0 auto;
-        background-color: white;
-        padding: 20px 30px 60px;
-
-        input {
-            margin-bottom: 15px;
-            height: 42px;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-        }
-
-        label {
-            margin-bottom: 10px;
-        }
-        button {
-            margin-top: 10px;
-        }
-    }
-`;
+const signUpService = new SignUpService();
 
 const options = [
     { value: 'bakery', label: 'Bakery' },
@@ -38,11 +14,8 @@ const options = [
 ]
 
 class SignUp extends Component {
-    //Create refs for input fields
+    //Create refs for input field
     addressInput = React.createRef();
-    cityInput = React.createRef();
-    stateInput = React.createRef();
-    zipInput = React.createRef();
 
     //State is just an object that holds all of the data in the component and that its children may need
     state = {
@@ -104,8 +77,8 @@ class SignUp extends Component {
     }
 
     handleChange = (event, field) => {
-        let value = event.target.value;
-        this.setState({ [field]: value });
+        // let value = event.target.value;
+        this.setState({ [field]: event });
     }
 
     //Handle merchant options
@@ -135,7 +108,7 @@ class SignUp extends Component {
             merchant: {
                 name: merchantName,
                 email: email,
-                // password: "GJIUTF789$%jk",
+                password: "GJIUTF789$%jk",
                 description: description,
                 phone_number: phone,
                 website: website,
@@ -150,23 +123,11 @@ class SignUp extends Component {
             }
         }
 
-        let response = await fetch('https://api.rifird.com/merchants/signup/signup_as_merchant', {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            body: JSON.stringify(data)
-        })
-        let json = await response.json();
-        console.log(json);
+        await signUpService.signUp(data);
+        // this.props.history.push(`/checkEmail/${data.email}`);
     }
 
     render() {
-        console.log('asasas')
         const {
             merchantName,
             phone,
@@ -181,8 +142,13 @@ class SignUp extends Component {
         } = this.state;
 
         return (
-            <SignForm>
-                <div className="form">
+            <>
+            <div className="login-header">
+            <img alt="" src="./img/rifirdLogo.png"/>
+            <p>Spread The Love</p>
+            </div>
+            <div className="sign-cont">
+                <div className="sign-form">
                     <Input onChange={(event) => this.handleChange(event, 'merchantName')} label="Merchant name" placeholder="Name" value={merchantName} />
                     <Input onChange={(event) => this.handleChange(event, 'phone')} label="Phone number" placeholder="Enter a phone number" value={phone} />
                     <Input onChange={(event) => this.handleChange(event, 'email')} label="Email address" placeholder="Address" value={email} />
@@ -203,7 +169,8 @@ class SignUp extends Component {
                     />
                     <Button onClick={() => this.handleSubmit()} themed={true} text="Submit" />
                 </div>
-            </SignForm>
+                </div>
+            </>
         );
     }
 }

@@ -22,7 +22,7 @@ export default class Base {
         }
     }
 
-    postJson = async (url, data) => { 
+    putJson = async (url, data) => { 
         try {
             // `${url}${data.perk.id}`
             let response = await fetch(url, {
@@ -43,4 +43,27 @@ export default class Base {
             return error;
         }
     }
+
+    postJson = async (url, data) => {
+        console.log(url, data);
+        try {
+            let response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                mode: "no-cors",
+                cache: "no-cache",
+                credentials: "same-origin",
+                body: data
+            })
+            let res = await response.json();
+            return res;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+
 }

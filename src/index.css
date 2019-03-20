@@ -20,6 +20,10 @@ code {
   height: 100px;
   font-family: Lato, sans-serif;
   color: white;
+  position: sticky;
+  margin-bottom: 20px;
+  top: 0;
+  
 }
 
 .login-header img {
@@ -73,6 +77,62 @@ code {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.login-container a {
+  text-decoration: none;
+  color: black;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  padding: 8px 14px;
+  font-weight: 400;
+  border-radius: 4px;
+}
+
+.login-container .loginBtn {
+  border: 1px solid #ccc;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 8px 14px;
+}
+
+
+/* SIGN UP FORM */
+.sign-cont {
+  /* position: fixed; */
+  margin: 0 auto;
+}
+
+.sign-form {
+  display: flex;
+  flex-direction: column;
+  width: 66.66%;
+  width: 60%;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px 30px 60px;
+}
+
+.sign-form input {
+  margin-bottom: 15px;
+  height: 30px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+
+
+.sign-form label {
+  margin-bottom: 10px;
+}
+
+.sign-form button {
+  margin-top: 20px;
+  background-color: #fd6c21;
+}
+.sign-form button:focus {
+  outline: none;
+}
+
 
 /* SIDEBAR */
 

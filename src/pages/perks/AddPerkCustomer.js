@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import styled from 'styled-components';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import CheckBox from '../../components/UI/CheckBox';
