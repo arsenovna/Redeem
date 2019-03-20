@@ -1,57 +1,15 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
 import Table from '../../components/Table';
-import styled from 'styled-components';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import {sortTable} from '../../helpers/Helper';
-import { BrowserRouter as Route,  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import 'react-tabs/style/react-tabs.css';
+import PerksService from '../../services/perks';
+import { getPerksRequest } from '../../redux/actions/index'
 
-
-let Container = styled.div`
-    .tabs {
-        width: 1000px;
-        margin-top: 30px;
-    }
-
-    .tab-panel {
-       background: white;
-       border-left: 1px solid #aaa;
-       border-right: 1px solid #aaa;
-       border-bottom: 1px solid #aaa;
-       margin-left: 30px;
-
-    }
-
-    .tab-list {
-        padding: 0 0 0 30px;
-        margin: 0;
-    }
-
-    a {
-        margin-left: 10px;
-        text-decoration: none;
-        color: #2f78b9;
-        font-weight: 400;
-    }
-
-    .extra-space {
-        padding: 10px 20px;
-    }
-
-    .add-button {
-        text-decoration: none;
-        color: white;
-        background: #fd6c21;
-        padding: 8px 12px;
-        font-size: 14px;
-        font-weight: 500;
-        margin-left: 30px; 
-        margin-top: 20px;
-        border-radius: 4px;
-    }
-`;
-
+const perksService = new PerksService();
 
 class Perks extends Component {
     state = {
@@ -64,24 +22,9 @@ class Perks extends Component {
         rows: []
     }
 
-    componentDidMount() {
-        let token = window.localStorage.getItem('authentication_token');
-        fetch('https://api.rifird.com/admin/perks/?limit=30&offset=0', {
-            method: 'GET',   
-            headers: {
-                'Authorization': `Token token=${token}`,
-                'Content-type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        // .then(data => console.log(data))
-        .then(data => this.setState({
-            rows: data.perks.map(item => ({
-                perk: item.title,
-                count: item.required_referrals,
-                buttons: <div><Link to="/perk/viewPerk">View</Link><Link to="/perk/editPerk">Edit</Link></div>
-            }))
-        }))
+    async componentDidMount(){
+        let data = await perksService.getPerks();
+        this.props.dispatch(getPerksRequest(data));
     }
 
     onSort = (sortKey) => {
@@ -91,35 +34,47 @@ class Perks extends Component {
     }
 
     render(){
-        let {headers, rows} = this.state;
+        const {perks} = this.props;
+        let rows = perks ? perks.map(item => ({
+            perk: item.title,
+            count: item.required_referrals,
+            buttons: <div><Link to={`/perk/viewPerk/${item.id}`}>View</Link><Link to={`/perk/editPerk/${item.id}`}>Edit</Link></div>
+        })) : {};
+        let {headers} = this.state;
         return(
-            <Container>
-            <Tabs className="tabs">
-                <TabList className="tab-list">
+            <div className="perk-container">
+            <Tabs>
+                <TabList>
                     <Tab>Customer Rewards</Tab> 
                     <Tab>Friends’ rewards</Tab>
                 </TabList>
-                <TabPanel className="tab-panel">
-                <div className="extra-space"></div>
-                    <Link className="add-button" to="/perk/addPerkCustomer">New Perk for Customer Rewards</Link>
-                    <UICard title="Visible" mid={true} half={false}>
+                <TabPanel>
+                    <div className="switch-button">
+                        <Link className="btn" to="/perk/addPerkCustomer">New Perk for Customer Rewards</Link>
+                    </div>
+                    <UICard className="x" title="Visible" mid={true} half={false}>
                         <Table className="headers" headers={headers} rows={rows} onSort={(sortKey) => this.onSort(sortKey)}/>
                     </UICard>
                     <UICard title="Hidden" mid={true} half={false}>
                         <Table headers={headers} rows={[]} onSort={(sortKey) => this.onSort(sortKey)}/>
                     </UICard>
                 </TabPanel>
-                <TabPanel className="tab-panel">
-                <div className="extra-space"></div>
-                    <Link className="add-button" to="/perk/addPerkCustomer">New Perk for Friends' Rewards</Link>
+                <TabPanel>
+                    <div className="switch-button">
+                        <Link className="btn" to="/perk/addPerkCustomer">New Perk for Friends' Rewards</Link>
+                    </div>
                     <UICard title="Visible" mid={true} half={false}>
                         <Table className="headers" headers={headers} rows={rows} onSort={(sortKey) => this.onSort(sortKey)}/>
                     </UICard>
                 </TabPanel>
             </Tabs>
-            </Container>
+            </div>
         );
     }
 }
 
-export default Perks;
+const mapStateToProps = state => ({
+    perks: state.perks
+})
+
+export default connect(mapStateToProps)(Perks);

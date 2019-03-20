@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 
 class Input extends Component {
     render(){
-        let {label, required, placeholder, onChange, style, inputRef, ...rest} = this.props;
+        let {label, required, placeholder, onChange, style, inputRef, value} = this.props;
 
         return (
             <>
             <label>{label}{required && <span style={{color: 'red', marginLeft: '5px'}}>*</span>}
             </label>
-                <input {...rest} ref={inputRef} style={{...style}} placeholder={placeholder} onChange={(event) => onChange(event)}/>
+                <input value={value || ''} ref={inputRef} style={{...style}} placeholder={placeholder} onChange={(event) => onChange(event.target.value)}/>
             </>
         );
     }

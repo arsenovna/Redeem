@@ -1,0 +1,2 @@
+export const FETCH_PERKS  = 'FETCH_PERKS';
+export const FETCH_MERCHANT = 'FETCH_MERCHANT';

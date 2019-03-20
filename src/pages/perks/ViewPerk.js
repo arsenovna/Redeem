@@ -1,83 +1,43 @@
 import React, {Component} from 'react';
 import UICard from '../../components/UI/UICard';
-import { BrowserRouter as Route,  Link } from "react-router-dom";
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-let Container = styled.div`
-    margin-left: 20px;
-
-    label {
-        font-weight: bold;
-    }
-
-    .group {
-        margin-bottom: 10px;
-    }
-
-    a {
-        text-decoration: none;
-        color: #333;
-        background-color: #fff;
-        border: 1px solid #ccc
-        font-size: 14px;
-        padding: 7px 14px;
-        border-radius: 4px;
-        font-weight: 500;
-   }
-
-   .back-botton {
-       margin-top: 20px;
-   }
-
-
-`;
 class ViewPerk extends Component {
     render(){
+        const {perks} = this.props;
+        const currentPerk = perks.find(item => item.id === parseInt(this.props.match.params.id));
+
+        let gridItem = (label, text) => {
+            return (
+                <div>
+                    <label>{label}</label>
+                    <div>{text}</div>
+                </div>
+            )
+        } 
         return(
-            <Container>
+            <div className="view-perk-container">
                 <UICard title="View perk">
-                    <div className="group">
-                        <label>Title</label>
-                        <div></div>
-                    </div>
-                    <div className="group">
-                        <label>Description</label>
-                        <div></div>
-                    </div>
-                    <div className="group">
-                        <label>Referral Bonus</label>
-                        <div></div>
-                    </div>
-                    <div className="group">
-                        <label>Enabled</label>
-                        <div></div>
-                    </div>
-                    <div className="group">
-                        <label>Requires QR code</label>
-                        <div></div>
-                    </div>
-                    <div className="group">
-                        <label>Fine print</label>
-                        <div></div>
-                    </div>
-                    <div className="group">
-                        <label>Required Referrals</label>
-                        <div></div>
-                    </div>
-                    <div className="group">
-                        <label>Expire date</label>
-                        <div></div>
-                    </div>
-                    <div className="back-botton">
+                <div className="perk-grid">
+                    {gridItem("Title", currentPerk.title)}
+                    {gridItem("Description", currentPerk.description)}
+                    {gridItem("Referral Bonus", currentPerk.referral_bonus ? 'yes' : 'no')}
+                    {gridItem("Enabled", currentPerk.enabled ? 'yes' : 'no')}
+                    {gridItem("Requires QR code", currentPerk.requires_qr_code ? 'yes' : 'no')}
+                    {gridItem("Fine print", currentPerk.fine_print)}
+                    {gridItem("Required Referrals", currentPerk.required_referrals)}
+                    {gridItem("Expire date<", currentPerk.expire_date)}
+                    <div>
                         <Link to="/perks">Back to perks list</Link>
                     </div>
+                    </div>
                 </UICard>
-            </Container>
+            </div>
         );
     }
-
-
 }
-
-
-export default ViewPerk;
+const mapStateToProps = state => ({
+    perks: state.perks
+})
+export default connect(mapStateToProps)(ViewPerk);
