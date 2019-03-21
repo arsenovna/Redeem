@@ -95,6 +95,10 @@ code {
   padding: 8px 14px;
 }
 
+.login-container .loginBtn:focus {
+  outline: none;
+}
+
 
 /* SIGN UP FORM */
 .sign-cont {

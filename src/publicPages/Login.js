@@ -20,11 +20,9 @@ class Login extends Component {
         let formData = new FormData();
         formData.append('merchant[email]', 'nurmuhamed@gmail.com');
         formData.append('merchant[password]', 'rifird123');
-        let x = await login.signIn(formData);
-        console.log(x)
-
-        // window.localStorage.setItem('authentication_token', json.merchant.authentication_token);
-        // window.location.href = "http://localhost:3000/dashboard";
+        let json = await login.signIn(formData);
+        window.localStorage.setItem('authentication_token', json.merchant.authentication_token);
+        window.location.href = "http://localhost:3000/dashboard";
       }
 
     render(){
