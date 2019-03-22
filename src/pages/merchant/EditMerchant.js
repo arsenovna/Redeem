@@ -32,7 +32,6 @@ class EditMerchant extends Component {
     handleSubmit = async () => {
         const data = { merchant: { ...this.state.merchant } }
         await merchantService.editMerchant(data);
-        console.log('bskdjbc');
     }
 
     render(){

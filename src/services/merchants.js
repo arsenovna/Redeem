@@ -9,6 +9,7 @@ export default class MerchantService {
 
     getMerchant = () => baseService.getJson(merchantAPI);
 
-    editMerchant = (data) => baseService.putJson(merchantAPI + data.merchant.id, data);
+    editMerchant = (data) => baseService.putJson(merchantAPI + data.merchant.id, JSON.stringify(data));
 
+    editProfile = (data) => baseService.putJson(merchantAPI + data.merchant.id, JSON.stringify(data));
 }

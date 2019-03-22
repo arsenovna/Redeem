@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
 import { Link } from 'react-router-dom'
-import { SignInService } from '../services/signIn';
+import { AuthService } from '../services/authorization';
 
-const login = new SignInService();
+const login = new AuthService();
 
 class Login extends Component {
     state = {
@@ -20,8 +20,8 @@ class Login extends Component {
         let formData = new FormData();
         formData.append('merchant[email]', 'nurmuhamed@gmail.com');
         formData.append('merchant[password]', 'rifird123');
-        let json = await login.signIn(formData);
-        window.localStorage.setItem('authentication_token', json.merchant.authentication_token);
+        let response = await login.signIn(formData);
+        window.localStorage.setItem('authentication_token', response.merchant.authentication_token);
         window.location.href = "http://localhost:3000/dashboard";
       }
 

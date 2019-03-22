@@ -24,7 +24,6 @@ export default class Base {
 
     putJson = async (url, data) => {
         try {
-            // `${url}${data.perk.id}`
             let response = await fetch(url, {
                 method: "PUT",
                 headers: {
@@ -34,7 +33,7 @@ export default class Base {
                 },
                 cache: "no-cache",
                 credentials: "same-origin",
-                body: JSON.stringify(data) // change it
+                body: data
             })
             let res = await response.json();
             return res;

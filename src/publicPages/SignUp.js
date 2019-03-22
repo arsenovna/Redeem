@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import Input from '../components/UI/Input';
 import Select from 'react-select';
 import Button from '../components/UI/Button';
-import { SignUpService } from '../services/signUp';
+import { AuthService } from '../services/authorization';
 
-const signUpService = new SignUpService();
+const signUpService = new AuthService();
 
 const options = [
     { value: 'bakery', label: 'Bakery' },
@@ -14,10 +14,8 @@ const options = [
 ]
 
 class SignUp extends Component {
-    //Create refs for input field
     addressInput = React.createRef();
 
-    //State is just an object that holds all of the data in the component and that its children may need
     state = {
         merchantName: '',
         phone: '',
@@ -77,16 +75,13 @@ class SignUp extends Component {
     }
 
     handleChange = (event, field) => {
-        // let value = event.target.value;
         this.setState({ [field]: event });
     }
 
-    //Handle merchant options
     handleOption = (selectedOption) => {
         this.setState({ selectedOption });
     }
 
-    //Handle form submit
     handleSubmit = async () => {
         const {
             merchantName,
