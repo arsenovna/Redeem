@@ -3,6 +3,9 @@ import Input from '../components/UI/Input';
 import Button from '../components/UI/Button';
 import { Link } from 'react-router-dom'
 import { AuthService } from '../services/authorization';
+import MerchantService from "../services/merchants";
+import { getMerchantRequest } from "../redux/actions/index";
+import { connect } from "react-redux";
 
 const login = new AuthService();
 
@@ -22,11 +25,13 @@ class Login extends Component {
         formData.append('merchant[password]', 'rifird123');
         let response = await login.signIn(formData);
         window.localStorage.setItem('authentication_token', response.merchant.authentication_token);
+        this.props.dispatch(getMerchantRequest(response.merchant));
         window.location.href = "http://localhost:3000/dashboard";
       }
 
     render(){
         const {email, password} = this.state;
+        console.log('merchant', this.props.merchant)
         return (
             <div>
                 <div className="login-header">
@@ -48,5 +53,9 @@ class Login extends Component {
         );
     }
 }
+const mapStateToProps = state => ({
+    merchant: state.merchant
+  });
 
-export default Login;
+export default connect(mapStateToProps)(Login);
+

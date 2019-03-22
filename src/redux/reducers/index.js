@@ -14,10 +14,9 @@ function rootReducer(state = initialState, action){
             perks: action.payload.perks
         }
     } else if(action.type === FETCH_MERCHANT){
-        console.log('action', action)
         return {
             ...state,
-            merchant: action.payload.merchant
+            merchant: action.payload
         }
     }
     return state;
